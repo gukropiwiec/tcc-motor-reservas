@@ -1,0 +1,7 @@
+{
+  "name": "tcc-motor-reservas",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
