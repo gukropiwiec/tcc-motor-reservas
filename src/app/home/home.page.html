@@ -1,42 +1,176 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-row class="ion-padding-horizontal">
-      <ion-col class="h-100 ion-align-self-center">
-        <ion-img src="assets/icon/LOGO DO SITE.jpg" class="logo-img ion-float-start"></ion-img>
-      </ion-col>
-      <ion-col class="h-100 ion-align-self-center item-nav-desk ion-hide-lg-down">
-        <ion-title class="text-center">Home</ion-title>
-      </ion-col>
-      <ion-col class="h-100 ion-align-self-center item-nav-desk ion-hide-lg-down">
-        <ion-title class="text-center">Quartos</ion-title>
-      </ion-col>
-      <ion-col class="h-100 ion-align-self-center item-nav-desk ion-hide-lg-down">
-        <ion-title class="text-center">Promoções</ion-title>
-      </ion-col>
-      <ion-col class="h-100 ion-align-self-center item-nav-desk ion-hide-lg-down">
-        <ion-title class="text-center">Sobre</ion-title>
-      </ion-col>
-      <ion-col class="h-100 ion-align-self-center item-nav-desk ion-hide-lg-down">
-        <ion-title class="text-center">Contatos</ion-title>
-      </ion-col>
-      <ion-col class="ion-text-end h-100">
-        <ion-button color="dark">Login</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-toolbar>
-</ion-header>
+<app-header></app-header>
 
 <ion-content [fullscreen]="true">
-  <!-- <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Home</ion-title>
-    </ion-toolbar>
-  </ion-header> -->
+  <div id="container" class="container mt-5">
+    <section class="banner mt-2 mb-5">
+      <ion-row class="h-100">
+        <ion-col style="display: flex;" class="h-100 align-items-center justify-content-center ion-hide-lg-down">
+          <h4 class="banner-text">
+            UM LUGAR ESPECIAL ONDE VOCÊ PODE FICAR E RELAXAR
+          </h4>
+        </ion-col>
+        <ion-col class="h-100 d-flex align-items-center justify-content-center">
+          <ion-card class="card-banner">
+            <ion-card-header>
+              <ion-card-title>RESERVAR UM QUARTO</ion-card-title>
+            </ion-card-header>
 
-  <div id="container" class="container">
-    Teste
+            <ion-card-content>
+              <ion-row>
+                <ion-col>
+                  <ion-item button="true" id="open-date-input" class="input-card" lines="none">
+                     <ion-label><ion-icon slot="start" icon="calendar-clear-outline"></ion-icon> Check-in</ion-label>
+                     <ion-text slot="end" class="text-center">{{ checkinDate }}</ion-text>
+                     <ion-popover trigger="open-date-input" show-backdrop="false">
+                       <ng-template>
+                         <ion-datetime
+                           #popoverDatetime1
+                           presentation="date"
+                           (ionChange)="checkinDate = formatDate(popoverDatetime1.value)"
+                         ></ion-datetime>
+                       </ng-template>
+                     </ion-popover>
+                   </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item button="true" id="open-date-input2" class="input-card" lines="none">
+                    <ion-label><ion-icon slot="start" icon="calendar-clear-outline"></ion-icon> Check-out</ion-label>
+                    <ion-text slot="end" class="text-center">{{ checkoutDate }}</ion-text>
+                    <ion-popover trigger="open-date-input2" show-backdrop="false">
+                      <ng-template>
+                        <ion-datetime
+                          #popoverDatetime2
+                          presentation="date"
+                          (ionChange)="checkoutDate = formatDate(popoverDatetime2.value)"
+                        ></ion-datetime>
+                      </ng-template>
+                    </ion-popover>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item id="open-date-input2" class="input-card" lines="none">
+                    <ion-label><ion-icon slot="start" icon="calendar-clear-outline"></ion-icon> Hóspedes</ion-label>
+                    <ion-select placeholder="-">
+                      <ion-select-option value="1">1</ion-select-option>
+                      <ion-select-option value="2">2</ion-select-option>
+                      <ion-select-option value="3">3</ion-select-option>
+                      <ion-select-option value="4">4</ion-select-option>
+                      <ion-select-option value="5">5</ion-select-option>
+                      <ion-select-option value="6">6</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item id="open-date-input2" class="input-card" lines="none">
+                    <ion-label><ion-icon slot="start" icon="calendar-clear-outline"></ion-icon> Quartos</ion-label>
+                    <ion-select placeholder="-">
+                      <ion-select-option value="1">1</ion-select-option>
+                      <ion-select-option value="2">2</ion-select-option>
+                      <ion-select-option value="3">3</ion-select-option>
+                      <ion-select-option value="4">4</ion-select-option>
+                      <ion-select-option value="5">5</ion-select-option>
+                      <ion-select-option value="6">6</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-button color="danger" expand="block">Pesquisar</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </section>
+    <section class="nossos-quartos">
+      <ion-row>
+        <ion-col size="auto">
+          <h5 class="fw-bold divider-title">NOSSOS QUARTOS</h5>
+        </ion-col>
+        <ion-col><hr></ion-col>
+      </ion-row>
+    </section>
+    <section class="o-que-oferecemos my-5">
+      <ion-row>
+        <ion-col size="auto">
+          <h5 class="fw-bold divider-title">O QUE OFERECEMOS</h5>
+        </ion-col>
+        <ion-col><hr></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" sizeLg="4">
+          <ion-card class="card-promotions">
+            <ion-card-content class="text-center">
+              <ion-icon icon="business" size="large"></ion-icon>
+              <h5 class="text-warning fw-bold title-card-promotions-section my-3">ACOMODAÇÕES</h5>
+              <h6 class="ion-text-uppercase">Nossos quartos oferecem acomodações confortáveis ​​com Wi-Fi gratuito, aquecimento central etc.</h6>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="12" sizeLg="4">
+          <ion-card class="card-promotions">
+            <ion-card-content class="text-center">
+              <ion-icon icon="fast-food" size="large"></ion-icon>
+              <h5 class="text-warning fw-bold title-card-promotions-section my-3">JANTAR</h5>
+              <h6 class="ion-text-uppercase">Jante com estilo e no seu melhor no Restaurante Resort, que serve uma grande variedade de gostos.</h6>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="12" sizeLg="4">
+          <ion-card class="card-promotions">
+            <ion-card-content class="text-center">
+              <ion-icon icon="star" size="large"></ion-icon>
+              <h5 class="text-warning fw-bold title-card-promotions-section my-3">SERVIÇO DE QUARTO</h5>
+              <h6 class="ion-text-uppercase">O serviço de quarto está disponível 24 horas, incluindo entregas de café da manhã.</h6>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </section>
+    <section class="como-reservar-um-quarto my-5">
+      <ion-row>
+        <ion-col size="auto">
+          <h5 class="fw-bold divider-title">COMO RESERVAR UM QUARTO</h5>
+        </ion-col>
+        <ion-col><hr></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" sizeLg="4">
+          <ion-card class="card-promotions">
+            <ion-card-content class="text-center">
+              <ion-icon icon="bed" size="large"></ion-icon>
+              <h5 class="text-warning fw-bold title-card-promotions-section my-3">SELECIONE UMA ACOMODAÇÃO</h5>
+              <h6 class="ion-text-uppercase">Você também pode selecionar um tipo de quarto exato durante a confirmação da reserva.</h6>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="12" sizeLg="4">
+          <ion-card class="card-promotions">
+            <ion-card-content class="text-center">
+              <ion-icon icon="list" size="large"></ion-icon>
+              <h5 class="text-warning fw-bold title-card-promotions-section my-3">PREENCHA O FORMULÁRIO ONLINE</h5>
+              <h6 class="ion-text-uppercase">Tudo começa com o preenchimento do formulário de reserva em nosso site.</h6>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="12" sizeLg="4">
+          <ion-card class="card-promotions">
+            <ion-card-content class="text-center">
+              <ion-icon icon="bag-check" size="large"></ion-icon>
+              <h5 class="text-warning fw-bold title-card-promotions-section my-3">CHECK-IN NO HOTEL</h5>
+              <h6 class="ion-text-uppercase">Ao chegar ao hotel, não se esqueça de fazer o check-in na recepção.</h6>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </section>
   </div>
 </ion-content>

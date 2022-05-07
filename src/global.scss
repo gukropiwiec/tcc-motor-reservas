@@ -25,6 +25,15 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+@font-face {
+    font-family: 'Nunito';
+    src: url('./assets/fonts/Nunito-Regular.ttf');
+}
+
+* {
+    font-family: 'Nunito';
+}
+
 .logo-img {
     height: 40px;
 }
