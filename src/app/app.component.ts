@@ -8,10 +8,10 @@ import { MenuController } from '@ionic/angular';
 export class AppComponent implements OnInit {
   public appPages = [
     { title: 'Home', url: '/', icon: 'home' },
-    { title: 'Quartos', url: '/folder/Outbox', icon: 'bed' },
-    { title: 'Promoções', url: '/folder/Favorites', icon: 'pricetag' },
-    { title: 'Sobre', url: '/folder/Archived', icon: 'information-circle' },
-    { title: 'Contatos', url: '/folder/Trash', icon: 'people' }
+    { title: 'Quartos', url: '/quartos', icon: 'bed' },
+    { title: 'Promoções', url: '/', icon: 'pricetag' },
+    { title: 'Sobre', url: '/', icon: 'information-circle' },
+    { title: 'Contatos', url: '/', icon: 'people' }
   ];
   constructor(private menuController: MenuController) {}
 
