@@ -4,6 +4,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+    border-radius: 5px;
 
     .banner-text {
         color: #fff;
@@ -43,4 +44,21 @@
 
 .card-promotions {
     min-height: 180px;
+}
+
+.card-quartos {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 5px;
+    height: 350px;
+
+    color:#fff;
+    h4 {
+        font-weight: 700;
+    }
+
+    .text-price {
+        color: #FFE600;
+    }
 }
