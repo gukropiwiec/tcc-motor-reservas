@@ -1,0 +1,26 @@
+<app-header></app-header>
+
+<ion-content [fullscreen]="true">
+  <section class="login-page-background">
+    <ion-row class="h-100 row-login-card">
+      <ion-col size="12" sizeMd="8" sizeLg="4">
+        <ion-card class="login-card py-3">
+          <ion-card-header>
+            <ion-card-title>LOGIN</ion-card-title>
+          </ion-card-header>
+        
+          <ion-card-content>
+            <ion-input placeholder="Endereço de E-mail" class="my-4"></ion-input>
+            <ion-input placeholder="Senha" class="mb-4"></ion-input>
+            <ion-button color="danger" class="mb-3">ENTRAR</ion-button>
+            <br>
+            <ion-note class="cursor-pointer">Esqueceu sua senha?</ion-note>
+            <br><br>
+            <ion-text class="text-cadastrar">Precisa de uma conta? <span class="text-blue cursor-pointer" [routerLink]="['/cadastro']">Cadastre-se agora!</span></ion-text>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </section>
+  <app-footer></app-footer>
+</ion-content>

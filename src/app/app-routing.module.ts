@@ -10,6 +10,22 @@ const routes: Routes = [
     path: 'quartos',
     loadChildren: () => import('./pages/quartos/quartos.module').then( m => m.QuartosPageModule)
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'cadastro',
+    loadChildren: () => import('./pages/cadastro/cadastro.module').then( m => m.CadastroPageModule)
+  },
+  {
+    path: 'minha-conta',
+    loadChildren: () => import('./pages/minha-conta/minha-conta.module').then( m => m.MinhaContaPageModule)
+  },
+  {
+    path: 'minhas-reservas',
+    loadChildren: () => import('./pages/minhas-reservas/minhas-reservas.module').then( m => m.MinhasReservasPageModule)
+  },
   // {
   //   path: 'folder/:id',
   //   loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
