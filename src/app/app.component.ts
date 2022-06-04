@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
     { title: 'Sobre', url: '/', icon: 'information-circle' },
     { title: 'Contatos', url: '/', icon: 'people' }
   ];
-  constructor(private menuController: MenuController) {}
+  constructor() {}
 
   async ngOnInit() {
   }

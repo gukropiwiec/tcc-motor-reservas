@@ -11,5 +11,4 @@ export class MinhaContaPage implements OnInit {
 
   ngOnInit() {
   }
-
 }

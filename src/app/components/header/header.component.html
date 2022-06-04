@@ -5,25 +5,71 @@
     </ion-buttons>
     <ion-row class="ion-padding-horizontal">
       <ion-col class="h-100 ion-align-self-center">
-        <ion-img src="assets/icon/LOGO DO SITE.jpg" class="logo-img ion-float-start"></ion-img>
+        <ion-img
+          src="assets/icon/LOGO DO SITE.jpg"
+          class="logo-img ion-float-start"
+        ></ion-img>
       </ion-col>
-      <ion-col class="h-100 ion-align-self-center item-nav-desk ion-hide-lg-down">
-        <ion-title class="text-center cursor-pointer" [routerLink]="['/']">Home</ion-title>
+      <ion-col
+        class="h-100 ion-align-self-center item-nav-desk ion-hide-lg-down"
+      >
+        <ion-title class="text-center cursor-pointer" [routerLink]="['/']"
+          >Home</ion-title
+        >
       </ion-col>
-      <ion-col class="h-100 ion-align-self-center item-nav-desk ion-hide-lg-down">
-        <ion-title class="text-center cursor-pointer" [routerLink]="['/quartos']">Quartos</ion-title>
+      <ion-col
+        class="h-100 ion-align-self-center item-nav-desk ion-hide-lg-down"
+      >
+        <ion-title
+          class="text-center cursor-pointer"
+          [routerLink]="['/quartos']"
+          >Quartos</ion-title
+        >
       </ion-col>
-      <ion-col class="h-100 ion-align-self-center item-nav-desk ion-hide-lg-down">
+      <ion-col
+        class="h-100 ion-align-self-center item-nav-desk ion-hide-lg-down"
+      >
         <ion-title class="text-center cursor-pointer">Promoções</ion-title>
       </ion-col>
-      <ion-col class="h-100 ion-align-self-center item-nav-desk ion-hide-lg-down">
+      <ion-col
+        class="h-100 ion-align-self-center item-nav-desk ion-hide-lg-down"
+      >
         <ion-title class="text-center cursor-pointer">Sobre</ion-title>
       </ion-col>
-      <ion-col class="h-100 ion-align-self-center item-nav-desk ion-hide-lg-down">
+      <ion-col
+        class="h-100 ion-align-self-center item-nav-desk ion-hide-lg-down"
+      >
         <ion-title class="text-center cursor-pointer">Contatos</ion-title>
       </ion-col>
-      <ion-col class="ion-text-end h-100">
-        <ion-button color="dark" [routerLink]="['/login']">Login</ion-button>
+      <ion-col class="ion-text-end h-100 ion-align-self-center">
+        <ion-button color="dark" [routerLink]="['/login']" *ngIf="!userS.user"
+          >Login</ion-button
+        >
+        <div *ngIf="userS.user" id="trigger-button" class="cursor-pointer">
+          <span class="text">Nome do Usuário </span>
+          <ion-icon icon="person-circle-outline" class="icon-selector mx-2" style="font-size: 25px"></ion-icon>
+          <ion-popover [isOpen]="popoverOpen" [arrow]="false" trigger="trigger-button">
+            <ng-template>
+              <ion-content>
+                <div class="p-3" (click)="dismissPopover()">
+                  <div class="cursor-pointer" [routerLink]="['/minha-conta']">
+                    <ion-icon name="person-outline" class="icon-selector mx-2"></ion-icon>
+                    <span class="text">Meu Perfil</span>
+                  </div>
+                  <div class="cursor-pointer" [routerLink]="['/minhas-reservas']">
+                    <ion-icon name="calendar-outline" class="icon-selector mx-2"></ion-icon>
+                    <span class="text">Minhas Reservas</span>
+                  </div>
+                  <hr>
+                  <div class="cursor-pointer" (click)="logout()">
+                    <ion-icon name="log-out-outline" class="icon-selector mx-2"></ion-icon>
+                    <span class="text">Sair</span>
+                  </div>
+                </div>
+              </ion-content>
+            </ng-template>
+          </ion-popover>
+        </div>
       </ion-col>
     </ion-row>
   </ion-toolbar>
