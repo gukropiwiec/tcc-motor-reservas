@@ -1,0 +1,61 @@
+.detalhesreserva-page-background {
+    min-height: 80vh;
+}
+
+.detalhesreserva-card {
+    align-self: center;
+    background-color: #E5E5E5;
+
+    .title-geral {
+        font-weight: 700;
+        font-size: 1.5rem;
+    }
+
+    ion-input {
+        background: #fff;
+        width: 80%;
+        margin: auto;
+        border-radius: 10px;
+        text-align: start;
+        --padding-start: 20px;
+    }
+
+    ion-button {
+        width: 80%;
+        font-weight: 700;
+    }
+}
+
+.row-detalhesreserva-card {
+    justify-content: center;
+    align-content: center;
+}
+
+.text-cadastrar {
+    background: rgba(65, 65, 77, 0.05);
+    padding: 4px 15px;
+    border-radius: 10px;
+}
+
+
+.card-inside {
+    box-shadow: none;
+
+    .titles-inside {
+        font-weight: 700;
+        font-size: 1.2rem;
+    }
+
+    .text-inside {
+        font-weight: bold;
+    }
+
+}
+
+.card-valor-pagamento {
+    background-color: #41414D;
+
+    ion-card-title {
+        color: #fff !important;
+    }
+}

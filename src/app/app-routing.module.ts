@@ -26,6 +26,10 @@ const routes: Routes = [
     path: 'minhas-reservas',
     loadChildren: () => import('./pages/minhas-reservas/minhas-reservas.module').then( m => m.MinhasReservasPageModule)
   },
+  {
+    path: 'detalhes-reserva/:id',
+    loadChildren: () => import('./pages/detalhes-reserva/detalhes-reserva.module').then( m => m.DetalhesReservaPageModule)
+  },
   // {
   //   path: 'folder/:id',
   //   loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
