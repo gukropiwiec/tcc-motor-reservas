@@ -1,0 +1,98 @@
+<ion-content [fullscreen]="true">
+  <div class="container mt-5">
+    <h4>DASHBOARD</h4>
+    <ion-row>
+      <ion-col>
+        <ion-card class="card-background-gray my-4">
+          <ion-card-content>
+            <ion-row>
+              <ion-col>
+                <ion-card>
+                  <ion-card-header>30</ion-card-header>
+                  <ion-card-content>Acomadações Cadastradas</ion-card-content>
+                </ion-card>
+              </ion-col>
+              <ion-col>
+                <ion-card>
+                  <ion-card-header>30</ion-card-header>
+                  <ion-card-content>Acomadações Cadastradas</ion-card-content>
+                </ion-card>
+              </ion-col>
+              <ion-col>
+                <ion-card>
+                  <ion-card-header>30</ion-card-header>
+                  <ion-card-content>Acomadações Cadastradas</ion-card-content>
+                </ion-card>
+              </ion-col>
+              <ion-col>
+                <ion-card>
+                  <ion-card-header>30</ion-card-header>
+                  <ion-card-content>Acomadações Cadastradas</ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" sizeMd="8">
+        <ion-card>
+          <ion-card-header>Acomodações Reservadas por Mês</ion-card-header>
+          <ion-card-content>
+            <img src="assets/images/dash-grafico.jpg">
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" sizeMd="4">
+        <ion-card>
+          <ion-card-header>% Acomodações Reservadas</ion-card-header>
+          <ion-card-content class="text-center">
+            <img src="assets/images/dash-grafico-2.jpg">
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <h4 class="mt-5 mb-3">ÚLTIMAS RESERVAS</h4>
+    <ion-row>
+      <ion-col>
+        <ion-card class="card-background-gray my-4">
+          <ion-card-content>
+            <ion-card>
+              <ion-card-content>
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Reserva</th>
+                        <th scope="col">Check-in</th>
+                        <th scope="col">Check-out</th>
+                        <th scope="col">Hóspedes</th>
+                        <th scope="col">Quarto</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Opções</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let n of [1, 2, 3, 4, 5, 6, 7, 8]">
+                        <th scope="row">#0006</th>
+                        <td>00/00/0000</td>
+                        <td>00/00/0000</td>
+                        <td>2 adultos 1 Criança</td>
+                        <td>Quarto Casal</td>
+                        <td><strong>R$ 150,00</strong></td>
+                        <td><strong class="text-danger">check-in pendente</strong></td>
+                        <td><ion-icon style="font-size: 1.5rem;" class="mx-2" name="pencil"></ion-icon> <ion-icon style="font-size: 1.5rem;" class="mx-2" name="information-circle-outline"></ion-icon> <ion-icon style="font-size: 1.5rem;" class="mx-2" name="log-out-outline"></ion-icon> <ion-icon style="font-size: 1.5rem;" class="mx-2 logout" name="log-out-outline"></ion-icon></td>
+                      </tr>
+                  </table>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+  <app-footer></app-footer>
+</ion-content>

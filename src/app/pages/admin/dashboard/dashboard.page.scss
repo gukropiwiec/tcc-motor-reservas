@@ -1,0 +1,23 @@
+.card-background-gray {
+    background-color: #F0F0F5;
+
+    ion-card {
+        box-shadow: none;
+        text-align: center;
+
+        ion-card-header {
+            font-weight: 700;
+            font-size: 2rem;
+            color: black;
+            margin-bottom: 0;
+        }
+    }
+}
+
+h4 {
+    font-weight: 700;
+}
+
+.logout {
+    transform: rotate(180deg);
+}

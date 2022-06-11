@@ -37,6 +37,14 @@ const routes: Routes = [
     path: 'detalhes-quarto/:id',
     loadChildren: () => import('./pages/detalhes-quarto/detalhes-quarto.module').then( m => m.DetalhesQuartoPageModule)
   },
+  {
+    path: 'admin/dashboard',
+    loadChildren: () => import('./pages/admin/dashboard/dashboard.module').then( m => m.DashboardPageModule)
+  },
+  {
+    path: 'admin/lista-reservas',
+    loadChildren: () => import('./pages/admin/lista-reservas/lista-reservas.module').then( m => m.ListaReservasPageModule)
+  },
   // {
   //   path: 'folder/:id',
   //   loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
