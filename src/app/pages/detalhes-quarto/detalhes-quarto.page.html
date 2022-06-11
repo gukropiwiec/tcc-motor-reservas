@@ -1,0 +1,142 @@
+<ion-content [fullscreen]="true">
+  <div class="container mt-5">
+    <ion-row>
+      <ion-col sizeXl="5" size="12">
+        <div class="img-quarto text-center">
+          <img src="assets/images/quartos-1.png" />
+        </div>
+      </ion-col>
+      <ion-col size="auto">
+        <div class="card-info ion-padding">
+          <ion-row>
+            <ion-col>
+              <h4>QUARTO CASAL</h4>
+            </ion-col>
+            <ion-col>
+              <ion-button class="float-end btn-reservar" color="danger"
+                >Reservar</ion-button
+              >
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-icon color="danger" icon="people"></ion-icon> Acomoda 2
+              pessoas (incluindo até 1 criança).
+              <span class="float-end"
+                ><span class="price">R$ 175,00</span
+                ><small> por noite</small></span
+              >
+              <br />
+              <span style="margin-left: 20px">1 cama de casal</span>
+              <br />
+              <ion-icon color="danger" icon="wifi"></ion-icon>
+              <strong> Internet: </strong> Wi-Fi grátis.
+              <br />
+              <ion-icon color="danger" icon="tv"></ion-icon>
+              <strong> Entretenimento: </strong> TV LCD 32 polegadas com canais
+              a cabo.
+              <br />
+              <ion-icon color="danger" icon="fast-food"></ion-icon>
+              <strong> Alimentação e bebida: </strong> serviço de quarto e
+              minibar.
+              <br />
+              <strong style="margin-left: 20px">Banheiro: </strong> banheiro
+              privativo com chuveiro, produtos de toalete de cortesia e secador
+              de cabelo.
+              <br />
+              <strong style="margin-left: 20px"> Conforto: </strong>
+              ar-condicionado com controle de temperatura e serviço de arrumação
+              diária.
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-grid class="ion-padding">
+      <section class="my-5">
+        <ion-row>
+          <ion-col size="auto">
+            <h5 class="fw-bold divider-title">ENDEREÇO</h5>
+          </ion-col>
+          <ion-col><hr /></ion-col>
+        </ion-row>
+        <ion-row>
+          <span>AV. SETE DE SETEMBRO, 3448, CURITIBA 80230-010</span>
+          <img src="assets/images/maps-example.png" class="my-3" />
+        </ion-row>
+      </section>
+      <section class="my-5">
+        <ion-row>
+          <ion-col size="auto">
+            <h5 class="fw-bold divider-title">AVALIAÇÃO</h5>
+          </ion-col>
+          <ion-col><hr /></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="auto">
+            <ion-badge
+              color="danger"
+              class="p-3"
+              [mode]="'ios'"
+              style="font-size: 1.3rem"
+              ><ion-icon name="star"></ion-icon> 8,2</ion-badge
+            >
+          </ion-col>
+          <ion-col style="font-weight: 700" class="align-self-center"
+            >MUITO BOM</ion-col
+          >
+        </ion-row>
+        <ion-row>
+          <ion-item class="mt-3">
+            <div>
+              A equipe do hotel foi muito boa durante a nossa estadia. Boa
+              localização. Gostamos muito.
+              <br />
+              <span style="font-size: 0.8rem"
+                >10/10/2022 14:20 - Martinha da Silva</span
+              >
+            </div>
+          </ion-item>
+          <ion-item class="my-4">
+            <div>
+              Excelente atendimento. Foram bastante compreensíveis conosco e
+              conseguiram um quarto para casal um pouco antes do horário
+              combinado para o check-in. Quarto aconchegante para uma boa noite
+              de descanso e ótimo chuveiro. Recomendo.
+              <br />
+              <span style="font-size: 0.8rem"
+                >10/10/2022 14:20 - Martinha da Silva</span
+              >
+            </div>
+          </ion-item>
+          <ion-item>
+            <div>
+              Excelente para hospedagem. Para quem vai passar alguns dias
+              visitando a cidade, é um otimo lugar para repousar. Café
+              excelente. Não há do que reclamar. Parabéns.
+              <br />
+              <span style="font-size: 0.8rem"
+                >10/10/2022 14:20 - Martinha da Silva</span
+              >
+            </div>
+          </ion-item>
+        </ion-row>
+      </section>
+      <section class="my-5">
+        <ion-row>
+          <ion-col size="auto">
+            <h5 class="fw-bold divider-title">INSTRUÇÕES</h5>
+          </ion-col>
+          <ion-col><hr /></ion-col>
+        </ion-row>
+        <ion-row class="mt-4">
+          <div>
+            <h5 style="font-weight: bold; text-transform: uppercase;">Check-in/Check-out</h5>
+            Check-in a qualquer momento após as 14:00 e check-out a qualquer momento antes das 12:00.
+          </div>
+        </ion-row>
+      </section>
+    </ion-grid>
+  </div>
+  <app-footer></app-footer>
+</ion-content>

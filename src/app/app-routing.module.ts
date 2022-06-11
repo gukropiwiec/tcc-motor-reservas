@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { UserGuard } from './guards/user.guard';
 
 const routes: Routes = [
   {
@@ -20,15 +21,21 @@ const routes: Routes = [
   },
   {
     path: 'minha-conta',
+    canActivate: [UserGuard],
     loadChildren: () => import('./pages/minha-conta/minha-conta.module').then( m => m.MinhaContaPageModule)
   },
   {
     path: 'minhas-reservas',
+    canActivate: [UserGuard],
     loadChildren: () => import('./pages/minhas-reservas/minhas-reservas.module').then( m => m.MinhasReservasPageModule)
   },
   {
     path: 'detalhes-reserva/:id',
     loadChildren: () => import('./pages/detalhes-reserva/detalhes-reserva.module').then( m => m.DetalhesReservaPageModule)
+  },
+  {
+    path: 'detalhes-quarto/:id',
+    loadChildren: () => import('./pages/detalhes-quarto/detalhes-quarto.module').then( m => m.DetalhesQuartoPageModule)
   },
   // {
   //   path: 'folder/:id',

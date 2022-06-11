@@ -10,17 +10,17 @@
               </ion-card-header>
             
               <ion-card-content>
-                <ion-input placeholder="Endereço de E-mail" class="my-4"></ion-input>
+                <ion-input placeholder="Endereço de E-mail" class="my-4" id="email"></ion-input>
                 <ion-input placeholder="Nome Completo" class="mb-4"></ion-input>
                 <ion-input placeholder="CPF" class="mb-4"></ion-input>
                 <ion-input placeholder="Data de Nascimento" class="mb-4"></ion-input>
-                <ion-input placeholder="Senha" class="mb-4" type="password"></ion-input>
+                <ion-input placeholder="Senha" class="mb-4" type="password" id="senha"></ion-input>
                 <ion-input placeholder="Confirmação da senha" class="mb-4" type="password"></ion-input>
                 <ion-note class="cursor-pointer">
                   Ao fazer login ou criar uma conta, você concorda com nossos
                   <span class="text-blue cursor-pointer">Termos e Condições</span> e <span class="text-blue cursor-pointer">Declaração de Privacidade</span>
                 </ion-note>
-                <ion-button color="danger" class="my-3">CADASTRAR</ion-button>
+                <ion-button color="danger" class="my-3" (click)="cadastrar()">CADASTRAR</ion-button>
               </ion-card-content>
             </ion-col>
             <ion-col size="12" sizeLg="6">
