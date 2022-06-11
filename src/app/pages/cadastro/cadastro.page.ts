@@ -9,6 +9,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./cadastro.page.scss'],
 })
 export class CadastroPage implements OnInit {
+  public form = {email: '', senha: '', type: 'user'};
 
   constructor(private userS: UserService, private router: Router, private toastController: ToastController) { }
 
@@ -19,14 +20,15 @@ export class CadastroPage implements OnInit {
   }
 
   async cadastrar() {
-    const form = {email: '', senha: ''};
-    form.email = (document.getElementById('email') as HTMLInputElement).value;
-    form.senha = (document.getElementById('senha') as HTMLInputElement).value;
-    const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
-    accounts.push(form);
-    localStorage.setItem('accounts', JSON.stringify(accounts));
-    this.router.navigateByUrl('login');
-    await this.presentToast();
+    if (!this.form.email || !this.form.senha) {
+      await this.presentToastError();
+    } else {
+      const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+      accounts.push(this.form);
+      localStorage.setItem('accounts', JSON.stringify(accounts));
+      await this.presentToast();
+      await this.router.navigateByUrl('login');
+    }
   }
 
   async presentToast() {
@@ -34,6 +36,15 @@ export class CadastroPage implements OnInit {
       message: 'Cadastro realizado com sucesso.',
       duration: 2000,
       color: 'success'
+    });
+    toast.present();
+  }
+
+  async presentToastError() {
+    const toast = await this.toastController.create({
+      message: 'Preencha os campos email e senha, se o problema persistir, tente novamente.',
+      duration: 2000,
+      color: 'danger'
     });
     toast.present();
   }

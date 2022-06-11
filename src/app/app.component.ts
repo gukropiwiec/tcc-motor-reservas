@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -6,15 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  public appPages = [
-    { title: 'Home', url: '/', icon: 'home' },
-    { title: 'Quartos', url: '/quartos', icon: 'bed' },
-    { title: 'Promoções', url: '/', icon: 'pricetag' },
-    { title: 'Sobre', url: '/', icon: 'information-circle' },
-    { title: 'Contatos', url: '/', icon: 'people' }
-  ];
-  constructor() {}
+  constructor(public userS: UserService) {}
 
   async ngOnInit() {
+    if (this.userS.user !== 'admin') {
+      this.userS.pagesMenuUser = true;
+    } else {
+      this.userS.pagesMenuUser = false;
+    }
   }
 }

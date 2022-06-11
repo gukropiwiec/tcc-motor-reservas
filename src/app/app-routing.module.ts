@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AdminGuard } from './guards/admin.guard';
 import { UserGuard } from './guards/user.guard';
 
 const routes: Routes = [
@@ -37,14 +38,24 @@ const routes: Routes = [
     path: 'detalhes-quarto/:id',
     loadChildren: () => import('./pages/detalhes-quarto/detalhes-quarto.module').then( m => m.DetalhesQuartoPageModule)
   },
-  {
-    path: 'admin/dashboard',
-    loadChildren: () => import('./pages/admin/dashboard/dashboard.module').then( m => m.DashboardPageModule)
-  },
-  {
-    path: 'admin/lista-reservas',
-    loadChildren: () => import('./pages/admin/lista-reservas/lista-reservas.module').then( m => m.ListaReservasPageModule)
-  },
+  { path: 'admin', canActivate: [AdminGuard], children: [
+    {
+      path: 'dashboard',
+      loadChildren: () => import('./pages/admin/dashboard/dashboard.module').then( m => m.DashboardPageModule)
+    },
+    {
+      path: 'lista-reservas',
+      loadChildren: () => import('./pages/admin/lista-reservas/lista-reservas.module').then( m => m.ListaReservasPageModule)
+    },
+    {
+      path: 'lista-quartos',
+      loadChildren: () => import('./pages/admin/lista-quartos/lista-quartos.module').then( m => m.ListaQuartosPageModule)
+    },
+    {
+      path: 'lista-usuarios',
+      loadChildren: () => import('./pages/admin/lista-usuarios/lista-usuarios.module').then( m => m.ListaUsuariosPageModule)
+    },
+  ]},
   // {
   //   path: 'folder/:id',
   //   loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)

@@ -39,6 +39,7 @@ export class HeaderComponent implements OnInit {
           id: 'confirm-button',
           handler: () => {
             this.userS.user = null;
+            this.userS.pagesMenuUser = true;
             this.popoverOpen = false;
           }
         }
