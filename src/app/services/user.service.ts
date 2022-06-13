@@ -12,7 +12,7 @@ export class UserService {
     { title: 'Quartos', url: '/quartos', icon: 'bed' },
     { title: 'Promoções', url: '/quartos', icon: 'pricetag' },
     { title: 'Sobre', url: '/sobre', icon: 'information-circle' },
-    { title: 'Contatos', url: '/contatos', icon: 'people' }
+    { title: 'Contatos', url: '/contato', icon: 'people' }
   ];
   private adminPages = [
     { title: 'Dashboard', url: '/admin/dashboard', icon: 'stats-chart' },
