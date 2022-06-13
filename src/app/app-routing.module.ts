@@ -54,8 +54,16 @@ const routes: Routes = [
     {
       path: 'lista-usuarios',
       loadChildren: () => import('./pages/admin/lista-usuarios/lista-usuarios.module').then( m => m.ListaUsuariosPageModule)
-    },
+    }
   ]},
+  {
+    path: 'sobre',
+    loadChildren: () => import('./pages/sobre/sobre.module').then( m => m.SobrePageModule)
+  },
+  {
+    path: 'contato',
+    loadChildren: () => import('./pages/contato/contato.module').then( m => m.ContatoPageModule)
+  },
   // {
   //   path: 'folder/:id',
   //   loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)

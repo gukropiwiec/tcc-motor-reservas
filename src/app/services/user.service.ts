@@ -10,9 +10,9 @@ export class UserService {
   private userPages = [
     { title: 'Home', url: '/', icon: 'home' },
     { title: 'Quartos', url: '/quartos', icon: 'bed' },
-    { title: 'Promoções', url: '/', icon: 'pricetag' },
-    { title: 'Sobre', url: '/', icon: 'information-circle' },
-    { title: 'Contatos', url: '/', icon: 'people' }
+    { title: 'Promoções', url: '/quartos', icon: 'pricetag' },
+    { title: 'Sobre', url: '/sobre', icon: 'information-circle' },
+    { title: 'Contatos', url: '/contatos', icon: 'people' }
   ];
   private adminPages = [
     { title: 'Dashboard', url: '/admin/dashboard', icon: 'stats-chart' },

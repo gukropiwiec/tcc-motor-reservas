@@ -1,0 +1,39 @@
+.contato-page-background {
+    min-height: 80vh;
+}
+
+.contato-card {
+    align-self: center;
+    text-align: center;
+    // background-color: #E5E5E5;
+
+    ion-card-title {
+        font-weight: 700;
+        font-size: 1.5rem;
+    }
+
+    ion-input {
+        background: #fff;
+        width: 80%;
+        margin: auto;
+        border-radius: 10px;
+        text-align: start;
+        --padding-start: 20px;
+    }
+
+    ion-button {
+        width: 80%;
+        font-weight: 700;
+    }
+}
+
+.row-contato-card {
+    justify-content: center;
+    align-content: center;
+}
+
+.text-cadastrar {
+    background: rgba(65, 65, 77, 0.05);
+    padding: 4px 15px;
+    border-radius: 10px;
+}

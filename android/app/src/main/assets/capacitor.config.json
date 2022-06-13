@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "tcc-motor-reservas",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
