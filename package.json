@@ -10,7 +10,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-android": "ionic capacitor build android --configuration=android"
+    "build-android": "ionic capacitor build android --configuration=android",
+    "build-browser": "ng deploy"
   },
   "private": true,
   "dependencies": {
