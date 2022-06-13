@@ -10,7 +10,7 @@ export class UserService {
   private userPages = [
     { title: 'Home', url: '/', icon: 'home' },
     { title: 'Quartos', url: '/quartos', icon: 'bed' },
-    { title: 'Promoções', url: '/quartos', icon: 'pricetag' },
+    { title: 'Promoções', url: '/promocoes', icon: 'pricetag' },
     { title: 'Sobre', url: '/sobre', icon: 'information-circle' },
     { title: 'Contatos', url: '/contato', icon: 'people' }
   ];

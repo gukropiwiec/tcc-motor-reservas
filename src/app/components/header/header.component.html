@@ -7,7 +7,8 @@
       <ion-col class="h-100 ion-align-self-center">
         <ion-img
           src="assets/icon/LOGO DO SITE.jpg"
-          class="logo-img ion-float-start"
+          class="logo-img ion-float-start cursor-pointer"
+          [routerLink]="['/']"
         ></ion-img>
       </ion-col>
       <ion-col
@@ -29,7 +30,7 @@
       <ion-col
         class="h-100 ion-align-self-center item-nav-desk ion-hide-lg-down"
       >
-        <ion-title class="text-center cursor-pointer" [routerLink]="['/quartos']">Promoções</ion-title>
+        <ion-title class="text-center cursor-pointer" [routerLink]="['/promocoes']">Promoções</ion-title>
       </ion-col>
       <ion-col
         class="h-100 ion-align-self-center item-nav-desk ion-hide-lg-down"
@@ -77,6 +78,7 @@
         <ion-img
           src="assets/icon/LOGO DO SITE.jpg"
           class="logo-img ion-float-start"
+          [routerLink]="['/admin/dashboard']"
         ></ion-img>
       </ion-col>
       <ion-col

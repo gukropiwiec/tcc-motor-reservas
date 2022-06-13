@@ -64,6 +64,10 @@ const routes: Routes = [
     path: 'contato',
     loadChildren: () => import('./pages/contato/contato.module').then( m => m.ContatoPageModule)
   },
+  {
+    path: 'promocoes',
+    loadChildren: () => import('./pages/promocoes/promocoes.module').then( m => m.PromocoesPageModule)
+  },
   // {
   //   path: 'folder/:id',
   //   loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)

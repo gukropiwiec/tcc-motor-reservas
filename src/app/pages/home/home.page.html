@@ -80,7 +80,7 @@
               </ion-row>
               <ion-row>
                 <ion-col>
-                  <ion-button color="danger" expand="block">Pesquisar</ion-button>
+                  <ion-button color="danger" expand="block" [routerLink]="['/quartos']">Pesquisar</ion-button>
                 </ion-col>
               </ion-row>
             </ion-card-content>
@@ -97,28 +97,28 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <div class="card-quartos d-flex align-items-center justify-content-center" style="background-image: url('assets/images/quarto-exemplo-1.png');">
+          <div class="card-quartos d-flex align-items-center justify-content-center cursor-pointer" [routerLink]="['/detalhes-quarto/1']" style="background-image: url('assets/images/quarto-exemplo-1.png');">
             <ion-row>
               <ion-col><h4 class="text-center">QUARTO DUPLO <br><br> <span class="text-price">R$ 300</span> / noite</h4></ion-col>
             </ion-row>
           </div>
         </ion-col>
         <ion-col>
-          <div class="card-quartos d-flex align-items-center justify-content-center" style="background-image: url('assets/images/quarto-exemplo-2.png');">
+          <div class="card-quartos d-flex align-items-center justify-content-center cursor-pointer" [routerLink]="['/detalhes-quarto/1']" style="background-image: url('assets/images/quarto-exemplo-2.png');">
             <ion-row>
               <ion-col><h4 class="text-center">QUARTO EXECUTIVO <br><br> <span class="text-price">R$ 500</span> / noite</h4></ion-col>
             </ion-row>
           </div>
         </ion-col>
         <ion-col>
-          <div class="card-quartos d-flex align-items-center justify-content-center" style="background-image: url('assets/images/quarto-exemplo-3.png');">
+          <div class="card-quartos d-flex align-items-center justify-content-center cursor-pointer" [routerLink]="['/detalhes-quarto/1']" style="background-image: url('assets/images/quarto-exemplo-3.png');">
             <ion-row>
               <ion-col><h4 class="text-center">QUARTO DE SOLTEIRO <br><br> <span class="text-price">R$ 250</span> / noite</h4></ion-col>
             </ion-row>
           </div>
         </ion-col>
         <ion-col>
-          <div class="card-quartos d-flex align-items-center justify-content-center" style="background-image: url('assets/images/quarto-exemplo-4.png');">
+          <div class="card-quartos d-flex align-items-center justify-content-center cursor-pointer" [routerLink]="['/detalhes-quarto/1']" style="background-image: url('assets/images/quarto-exemplo-4.png');">
             <ion-row>
               <ion-col><h4 class="text-center">VIP SUITE <br><br> <span class="text-price">R$ 650</span> / noite</h4></ion-col>
             </ion-row>

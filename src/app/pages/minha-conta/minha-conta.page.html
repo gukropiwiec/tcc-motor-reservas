@@ -8,57 +8,111 @@
               <ion-card-header>
                 <ion-card-title>PERFIL</ion-card-title>
               </ion-card-header>
-            
+
               <ion-card-content>
-                <ion-input placeholder="Endereço de E-mail" class="my-4"></ion-input>
+                <ion-input
+                  placeholder="Endereço de E-mail"
+                  class="my-4"
+                ></ion-input>
                 <ion-input placeholder="Nome Completo" class="mb-4"></ion-input>
                 <ion-input placeholder="CPF" class="mb-4"></ion-input>
-                <ion-input placeholder="Data de Nascimento" class="mb-4"></ion-input>
-                <ion-button size="small">Editar</ion-button>
+                <ion-input
+                  placeholder="Data de Nascimento"
+                  class="mb-4"
+                ></ion-input>
+                <ion-button id="trigger-modal" size="small">Editar</ion-button>
+                <ion-modal
+                  trigger="trigger-modal"
+                  [isOpen]="false"
+                  [swipeToClose]="true"
+                  style="--max-height: 80vh;"
+                >
+                  <ng-template>
+                    <ion-content class="background-modal">
+                      <div class="p-5 text-center">
+                        <h4 class="mb-5">Editar Dados</h4>
+                        <ion-input
+                          placeholder="Endereço de E-mail"
+                          class="my-4"
+                        ></ion-input>
+                        <ion-input
+                          placeholder="Nome Completo"
+                          class="mb-4"
+                        ></ion-input>
+                        <ion-input placeholder="CPF" class="mb-4"></ion-input>
+                        <ion-input
+                          placeholder="Data de Nascimento"
+                          class="mb-4"
+                        ></ion-input>
+                        <ion-input
+                          placeholder="Senha"
+                          class="mb-4"
+                          type="password"
+                        ></ion-input>
+                        <ion-input
+                          placeholder="Repita a senha"
+                          class="mb-4"
+                          type="password"
+                        ></ion-input>
+                        <ion-button id="trigger-modal" color="success">Salvar</ion-button>
+                      </div>
+                    </ion-content>
+                  </ng-template>
+                </ion-modal>
               </ion-card-content>
             </ion-col>
             <ion-col size="12" sizeLg="6">
               <ion-card-header>
                 <ion-card-title>ÚLTIMAS RESERVAS</ion-card-title>
               </ion-card-header>
-            
+
               <ion-card-content>
                 <ion-item detail lines="none">
                   <ion-label>
-                    Pedido: <span class="text-danger">#0007 </span> <span class="text-info"> CHECK-IN PENDENTE</span>
+                    Pedido: <span class="text-danger">#0007 </span>
+                    <span class="text-info"> CHECK-IN PENDENTE</span>
                   </ion-label>
                 </ion-item>
                 <ion-item detail lines="none">
                   <ion-label>
-                    Pedido: <span class="text-danger">#0006 </span> <span class="text-blue"> ENCERRADO</span>
+                    Pedido: <span class="text-danger">#0006 </span>
+                    <span class="text-blue"> ENCERRADO</span>
                   </ion-label>
                 </ion-item>
                 <ion-item detail lines="none">
                   <ion-label>
-                    Pedido: <span class="text-danger">#0005 </span> <span class="text-blue"> ENCERRADO</span>
+                    Pedido: <span class="text-danger">#0005 </span>
+                    <span class="text-blue"> ENCERRADO</span>
                   </ion-label>
                 </ion-item>
                 <ion-item detail lines="none">
                   <ion-label>
-                    Pedido: <span class="text-danger">#0004 </span> <span class="text-blue"> ENCERRADO</span>
+                    Pedido: <span class="text-danger">#0004 </span>
+                    <span class="text-blue"> ENCERRADO</span>
                   </ion-label>
                 </ion-item>
                 <ion-item detail lines="none">
                   <ion-label>
-                    Pedido: <span class="text-danger">#0003 </span> <span class="text-blue"> ENCERRADO</span>
+                    Pedido: <span class="text-danger">#0003 </span>
+                    <span class="text-blue"> ENCERRADO</span>
                   </ion-label>
                 </ion-item>
                 <ion-item detail lines="none">
                   <ion-label>
-                    Pedido: <span class="text-danger">#0002 </span> <span class="text-blue"> ENCERRADO</span>
+                    Pedido: <span class="text-danger">#0002 </span>
+                    <span class="text-blue"> ENCERRADO</span>
                   </ion-label>
                 </ion-item>
                 <ion-item detail lines="none">
                   <ion-label>
-                    Pedido: <span class="text-danger">#0001 </span> <span class="text-blue"> ENCERRADO</span>
+                    Pedido: <span class="text-danger">#0001 </span>
+                    <span class="text-blue"> ENCERRADO</span>
                   </ion-label>
                 </ion-item>
-                <div class="float-end cursor-pointer" [routerLink]="['/minhas-reservas']">
+                <div
+                  class="float-end cursor-pointer"
+                  [routerLink]="['/minhas-reservas']"
+                >
                   <ion-note class="text-info">Ver todas as reservas</ion-note>
                 </div>
               </ion-card-content>
