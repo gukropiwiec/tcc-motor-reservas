@@ -3,9 +3,9 @@
     <ion-col offsetLg="2">
       <h4>NOSSOS CONTATOS</h4>
       <br>
-      <p>(41) 99999-9999</p>
+      <p>Telefone: {{hotelS.hotel?.phone}}</p>
       <br>
-      <p>contato@hotel.com.br</p>
+      <p>Email: {{hotelS.hotel?.email}}</p>
     </ion-col>
     <ion-col>
       <h4>NAVEGAÇÃO</h4>
@@ -18,7 +18,7 @@
       </ul>
     </ion-col>
     <ion-col>
-      <ion-button color="light">RESERVAR AGORA</ion-button>
+      <ion-button color="light" [routerLink]="['/quartos']">RESERVAR AGORA</ion-button>
     </ion-col>
   </ion-row>
   <ion-row class="botton-footer p-2 text-sm-center">

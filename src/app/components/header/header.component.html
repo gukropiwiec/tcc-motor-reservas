@@ -24,23 +24,37 @@
         <ion-title
           class="text-center cursor-pointer"
           [routerLink]="['/quartos']"
-          >Quartos</ion-title
+          >Acomodações</ion-title
         >
       </ion-col>
-      <ion-col
+      <!-- <ion-col
         class="h-100 ion-align-self-center item-nav-desk ion-hide-lg-down"
       >
         <ion-title class="text-center cursor-pointer" [routerLink]="['/promocoes']">Promoções</ion-title>
+      </ion-col> -->
+      <ion-col
+        class="h-100 ion-align-self-center item-nav-desk ion-hide-lg-down"
+      >
+        <ion-title class="text-center cursor-pointer" [routerLink]="['/sobre']">Estrutura</ion-title>
       </ion-col>
       <ion-col
         class="h-100 ion-align-self-center item-nav-desk ion-hide-lg-down"
       >
-        <ion-title class="text-center cursor-pointer" [routerLink]="['/sobre']">Sobre</ion-title>
+        <ion-title class="text-center cursor-pointer" [routerLink]="['/contato']">Contato</ion-title>
       </ion-col>
-      <ion-col
-        class="h-100 ion-align-self-center item-nav-desk ion-hide-lg-down"
-      >
-        <ion-title class="text-center cursor-pointer" [routerLink]="['/contato']">Contatos</ion-title>
+      <ion-col class="ion-text-end h-100 ion-align-self-center">
+          <ion-button id="trigger-button-hotel">{{hotelS.hotel?.name}}</ion-button>
+          <ion-popover [isOpen]="popoverOpen" [arrow]="false" trigger="trigger-button-hotel">
+            <ng-template>
+              <ion-content>
+                <div class="p-3" (click)="dismissPopover()">
+                  <div *ngFor="let hotel of hoteis" class="cursor-pointer" (click)="setHotel(hotel)">
+                    <span class="text">{{hotel.name}}</span>
+                  </div>
+                </div>
+              </ion-content>
+            </ng-template>
+          </ion-popover>
       </ion-col>
       <ion-col class="ion-text-end h-100 ion-align-self-center">
         <ion-button color="dark" [routerLink]="['/login']" *ngIf="!userS.user"
@@ -107,6 +121,20 @@
       >
         <ion-title class="text-center cursor-pointer" [routerLink]="['/admin/lista-usuarios']">Usuários</ion-title>
       </ion-col>
+      <ion-col class="ion-text-end h-100 ion-align-self-center">
+        <ion-button id="trigger-button-hotel-2">{{hotelS.hotel?.name}}</ion-button>
+        <ion-popover [isOpen]="popoverOpen" [arrow]="false" trigger="trigger-button-hotel-2">
+          <ng-template>
+            <ion-content>
+              <div class="p-3" (click)="dismissPopover()">
+                <div *ngFor="let hotel of hoteis" class="cursor-pointer" (click)="setHotel(hotel)">
+                  <span class="text">{{hotel.name}}</span>
+                </div>
+              </div>
+            </ion-content>
+          </ng-template>
+        </ion-popover>
+    </ion-col>
       <ion-col class="ion-text-end h-100 ion-align-self-center">
         <div *ngIf="userS.user" id="trigger-button" class="cursor-pointer">
           <span class="text">Admin </span>

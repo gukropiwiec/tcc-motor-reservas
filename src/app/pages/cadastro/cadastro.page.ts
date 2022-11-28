@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { HttpService } from 'src/app/services/http.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -9,9 +10,27 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./cadastro.page.scss'],
 })
 export class CadastroPage implements OnInit {
-  public form = {email: '', senha: '', type: 'user'};
+  public form = {
+    firstName: null,
+    lastName: null,
+    email: null,
+    phone: null,
+    password: null,
+    cpf: null,
+    addressStreet: null,
+    addressNumber: null,
+    addressCity: null,
+    addressDistrict: null,
+    addressCountry: null,
+    addressCep: null,
+  };
 
-  constructor(private userS: UserService, private router: Router, private toastController: ToastController) { }
+  constructor(
+    private userS: UserService,
+    private router: Router,
+    private toastController: ToastController,
+    private httpS: HttpService
+  ) {}
 
   ngOnInit() {
     if (this.userS.user) {
@@ -20,14 +39,12 @@ export class CadastroPage implements OnInit {
   }
 
   async cadastrar() {
-    if (!this.form.email || !this.form.senha) {
-      await this.presentToastError();
+    const user = await this.httpS.post('user', this.form);
+    if (user) {
+      this.presentToast();
+      this.router.navigateByUrl('/');
     } else {
-      const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
-      accounts.push(this.form);
-      localStorage.setItem('accounts', JSON.stringify(accounts));
-      await this.presentToast();
-      await this.router.navigateByUrl('login');
+      this.presentToastError();
     }
   }
 
@@ -35,16 +52,17 @@ export class CadastroPage implements OnInit {
     const toast = await this.toastController.create({
       message: 'Cadastro realizado com sucesso.',
       duration: 2000,
-      color: 'success'
+      color: 'success',
     });
     toast.present();
   }
 
   async presentToastError() {
     const toast = await this.toastController.create({
-      message: 'Preencha os campos email e senha, se o problema persistir, tente novamente.',
+      message:
+        'Preencha os campos email e senha, se o problema persistir, tente novamente.',
       duration: 2000,
-      color: 'danger'
+      color: 'danger',
     });
     toast.present();
   }

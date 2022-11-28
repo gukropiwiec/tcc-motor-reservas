@@ -1,6 +1,9 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { IonDatetime } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { IonDatetime, ToastController } from '@ionic/angular';
 import { format, parseISO, getDate, getMonth, getYear } from 'date-fns';
+import * as moment from 'moment';
+import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-home',
@@ -10,13 +13,29 @@ import { format, parseISO, getDate, getMonth, getYear } from 'date-fns';
 export class HomePage implements OnInit {
   @ViewChild(IonDatetime, { static: true }) datetime: any;
 
-  checkinDate = '-';
-  checkoutDate = '-';
+  today = moment().format('YYYY-MM-DD');
 
-  constructor() {}
+  nossosQuartos = [];
 
-  ngOnInit(): void {
+  checkInDate = null;
+  checkInDateShow = '-';
+  checkOutDate = null;
+  checkOutDateShow = '-';
+  qtyAdults = 0;
+  qtyChildren = 0;
 
+  constructor(
+    private toastController: ToastController,
+    private router: Router,
+    private httpS: HttpService
+  ) {}
+
+  async ngOnInit(): Promise<void> {
+    this.nossosQuartos = (await this.getQuartos()) as any[];
+  }
+
+  getQuartos() {
+    return this.httpS.get('room');
   }
 
   confirm() {
@@ -27,17 +46,64 @@ export class HomePage implements OnInit {
     this.datetime.nativeEl.reset();
   }
 
-  formatDate(value: string) {
-    return format(parseISO(value), 'dd/MM/yyyy');
+  formatCheckOutDate(value: string) {
+    this.checkOutDateShow = this.formatDate(value);
+    this.checkOutDate = this.formatDate(value, 'yyyy-MM-dd');
   }
 
-  isDateEnabled(dateIsoString: string) {
-    const date = new Date(dateIsoString);
-    if (getDate(date) === 1 && getMonth(date) === 0 && getYear(date) === 2022) {
-      // Disables January 1, 2022.
-      return false;
+  formatCheckInDate(value: string) {
+    this.checkInDateShow = this.formatDate(value);
+    this.checkInDate = this.formatDate(value, 'yyyy-MM-dd');
+  }
+
+  buscarQuartos() {
+    const qtyAdultsEl = (
+      document.getElementById('qtyAdults') as HTMLInputElement
+    ).value;
+    const qtyChildrenEl = (
+      document.getElementById('qtyChildren') as HTMLInputElement
+    ).value;
+
+    if (
+      !qtyAdultsEl ||
+      !qtyChildrenEl ||
+      !this.checkInDate ||
+      !this.checkOutDate
+    ) {
+      this.presentToast(
+        'Por favor, preencha todos os campos para pesquisar um quarto.',
+        'danger'
+      );
+      return;
     }
-    return true;
+
+    const form = {
+      checkInDate: this.checkInDate,
+      checkOutDate: this.checkOutDate,
+      qtyAdults: Number(qtyAdultsEl),
+      qtyChildren: Number(qtyChildrenEl),
+    };
+
+    this.checkInDateShow = '-';
+    this.checkOutDateShow = '-';
+    this.checkInDate = null;
+    this.checkOutDate = null;
+    this.qtyAdults = 0;
+    this.qtyChildren = 0;
+
+    this.router.navigateByUrl('/quartos', { state: form });
   }
 
+  private formatDate(value: string, pattern = 'dd/MM/yyyy') {
+    return format(parseISO(value), pattern);
+  }
+
+  private async presentToast(message: string, color: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 3000,
+      color,
+    });
+    toast.present();
+  }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-lista-reservas',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lista-reservas.page.scss'],
 })
 export class ListaReservasPage implements OnInit {
+  reservas = [];
 
-  constructor() { }
+  constructor(private httpS: HttpService) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.reservas = (await this.httpS.get('booking')) as any;
   }
-
 }

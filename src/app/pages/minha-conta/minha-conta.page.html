@@ -11,21 +11,35 @@
 
               <ion-card-content>
                 <ion-input
+                  readonly=""
                   placeholder="Endereço de E-mail"
                   class="my-4"
+                  value="{{user.email}}"
                 ></ion-input>
-                <ion-input placeholder="Nome Completo" class="mb-4"></ion-input>
-                <ion-input placeholder="CPF" class="mb-4"></ion-input>
                 <ion-input
-                  placeholder="Data de Nascimento"
+                  readonly
+                  placeholder="Nome Completo"
                   class="mb-4"
+                  value="{{user.firstName}} {{user.lastName}}"
+                ></ion-input>
+                <ion-input
+                  readonly
+                  placeholder="CPF"
+                  class="mb-4"
+                  value="{{user.cpf}}"
+                ></ion-input>
+                <ion-input
+                  readonly
+                  placeholder="Telefone"
+                  class="mb-4"
+                  value="{{user.phone}}"
                 ></ion-input>
                 <ion-button id="trigger-modal" size="small">Editar</ion-button>
                 <ion-modal
                   trigger="trigger-modal"
                   [isOpen]="false"
                   [swipeToClose]="true"
-                  style="--max-height: 80vh;"
+                  style="--max-height: 80vh"
                 >
                   <ng-template>
                     <ion-content class="background-modal">
@@ -54,7 +68,9 @@
                           class="mb-4"
                           type="password"
                         ></ion-input>
-                        <ion-button id="trigger-modal" color="success">Salvar</ion-button>
+                        <ion-button id="trigger-modal" color="success"
+                          >Salvar</ion-button
+                        >
                       </div>
                     </ion-content>
                   </ng-template>
@@ -67,46 +83,10 @@
               </ion-card-header>
 
               <ion-card-content>
-                <ion-item detail lines="none">
+                <ion-item detail lines="none" *ngFor="let reserva of reservas">
                   <ion-label>
-                    Pedido: <span class="text-danger">#0007 </span>
-                    <span class="text-info"> CHECK-IN PENDENTE</span>
-                  </ion-label>
-                </ion-item>
-                <ion-item detail lines="none">
-                  <ion-label>
-                    Pedido: <span class="text-danger">#0006 </span>
-                    <span class="text-blue"> ENCERRADO</span>
-                  </ion-label>
-                </ion-item>
-                <ion-item detail lines="none">
-                  <ion-label>
-                    Pedido: <span class="text-danger">#0005 </span>
-                    <span class="text-blue"> ENCERRADO</span>
-                  </ion-label>
-                </ion-item>
-                <ion-item detail lines="none">
-                  <ion-label>
-                    Pedido: <span class="text-danger">#0004 </span>
-                    <span class="text-blue"> ENCERRADO</span>
-                  </ion-label>
-                </ion-item>
-                <ion-item detail lines="none">
-                  <ion-label>
-                    Pedido: <span class="text-danger">#0003 </span>
-                    <span class="text-blue"> ENCERRADO</span>
-                  </ion-label>
-                </ion-item>
-                <ion-item detail lines="none">
-                  <ion-label>
-                    Pedido: <span class="text-danger">#0002 </span>
-                    <span class="text-blue"> ENCERRADO</span>
-                  </ion-label>
-                </ion-item>
-                <ion-item detail lines="none">
-                  <ion-label>
-                    Pedido: <span class="text-danger">#0001 </span>
-                    <span class="text-blue"> ENCERRADO</span>
+                    Reserva: <span class="text-danger">#{{reserva.id}} </span>
+                    <span class="{{reserva.status === 'Pago' ? 'text-success' : 'text-info'}}"> {{reserva.status}}</span>
                   </ion-label>
                 </ion-item>
                 <div

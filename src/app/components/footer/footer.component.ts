@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HotelService } from 'src/app/services/hotel.service';
+import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-footer',
@@ -6,9 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
+  constructor(public hotelS: HotelService) {}
 
-  constructor() { }
-
-  ngOnInit() {}
-
+  async ngOnInit() {}
 }

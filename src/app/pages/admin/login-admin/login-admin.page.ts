@@ -5,11 +5,11 @@ import { HttpService } from 'src/app/services/http.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: 'app-login-admin',
+  templateUrl: './login-admin.page.html',
+  styleUrls: ['./login-admin.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginAdminPage implements OnInit {
   accounts = [];
   public form = { email: '', password: '' };
 
@@ -29,27 +29,13 @@ export class LoginPage implements OnInit {
   }
 
   async login() {
-    const resLogin = (await this.httpS.login(this.form)) as any;
+    const resLogin = (await this.httpS.loginAdmin(this.form)) as any;
     console.log(resLogin);
     if (resLogin?.token) {
-      if (resLogin?.user?.role?.name === 'Admin') {
-        this.userS.user = 'admin';
-        this.userS.token = resLogin.token;
-        this.userS.pagesMenuUser = false;
-        this.router.navigateByUrl('/admin/dashboard');
-      } else if (resLogin?.user.role?.name === 'User') {
-        this.userS.user = 'user';
-        this.userS.userInfo = resLogin.user;
-        this.userS.pagesMenuUser = true;
-        this.userS.token = resLogin.token;
-        this.router.navigateByUrl('/');
-      } else if (resLogin?.user.role?.name === 'Moderator') {
-        this.userS.user = 'admin';
-        this.userS.userInfo = resLogin.user;
-        this.userS.pagesMenuUser = true;
-        this.userS.token = resLogin.token;
-        this.router.navigateByUrl('/admin/dashboard');
-      }
+      this.userS.user = 'admin';
+      this.userS.token = resLogin.token;
+      this.userS.pagesMenuUser = false;
+      this.router.navigateByUrl('/admin/dashboard');
     } else {
       this.presentToastError();
     }

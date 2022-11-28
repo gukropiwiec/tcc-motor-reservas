@@ -8,26 +8,102 @@
               <ion-card-header>
                 <ion-card-title>CADASTRO</ion-card-title>
               </ion-card-header>
-            
+
               <ion-card-content>
-                <ion-input placeholder="Endereço de E-mail" [(ngModel)]="form.email" class="my-4" id="email"></ion-input>
-                <ion-input placeholder="Nome Completo" class="mb-4"></ion-input>
-                <ion-input placeholder="CPF" class="mb-4"></ion-input>
-                <ion-input placeholder="Data de Nascimento" class="mb-4"></ion-input>
-                <ion-input placeholder="Senha" [(ngModel)]="form.senha" class="mb-4" type="password" id="senha"></ion-input>
-                <ion-input placeholder="Confirmação da senha" class="mb-4" type="password"></ion-input>
+                <ion-input
+                  placeholder="Endereço de E-mail"
+                  [(ngModel)]="form.email"
+                  class="my-4"
+                  id="email"
+                ></ion-input>
+                <ion-input
+                  placeholder="Primeiro Nome"
+                  [(ngModel)]="form.firstName"
+                  class="mb-4"
+                ></ion-input>
+                <ion-input
+                  placeholder="Segundo Nome"
+                  [(ngModel)]="form.lastName"
+                  class="mb-4"
+                ></ion-input>
+                <ion-input
+                  placeholder="CPF"
+                  [(ngModel)]="form.cpf"
+                  class="mb-4"
+                ></ion-input>
+                <ion-input
+                  placeholder="Telefone"
+                  [(ngModel)]="form.phone"
+                  class="mb-4"
+                ></ion-input>
+                <ion-input
+                  placeholder="CEP"
+                  [(ngModel)]="form.addressCep"
+                  class="mb-4"
+                ></ion-input>
+                <ion-input
+                  placeholder="Rua"
+                  [(ngModel)]="form.addressStreet"
+                  class="mb-4"
+                ></ion-input>
+                <ion-input
+                  placeholder="Número"
+                  [(ngModel)]="form.addressNumber"
+                  class="mb-4"
+                ></ion-input>
+                <ion-input
+                  placeholder="Bairro"
+                  [(ngModel)]="form.addressDistrict"
+                  class="mb-4"
+                ></ion-input>
+                <ion-input
+                  placeholder="Cidade"
+                  [(ngModel)]="form.addressCity"
+                  class="mb-4"
+                ></ion-input>
+                <ion-input
+                  placeholder="País"
+                  [(ngModel)]="form.addressCountry"
+                  class="mb-4"
+                ></ion-input>
+                <ion-input
+                  placeholder="Senha"
+                  [(ngModel)]="form.password"
+                  class="mb-4"
+                  type="password"
+                  id="senha"
+                ></ion-input>
+                <ion-input
+                  placeholder="Confirmação da senha"
+                  class="mb-4"
+                  type="password"
+                ></ion-input>
                 <ion-note class="cursor-pointer">
                   Ao fazer login ou criar uma conta, você concorda com nossos
-                  <span class="text-blue cursor-pointer">Termos e Condições</span> e <span class="text-blue cursor-pointer">Declaração de Privacidade</span>
+                  <span class="text-blue cursor-pointer"
+                    >Termos e Condições</span
+                  >
+                  e
+                  <span class="text-blue cursor-pointer"
+                    >Declaração de Privacidade</span
+                  >
                 </ion-note>
-                <ion-button color="danger" class="my-3" (click)="cadastrar()">CADASTRAR</ion-button>
+                <ion-button color="danger" class="my-3" (click)="cadastrar()"
+                  >CADASTRAR</ion-button
+                >
               </ion-card-content>
             </ion-col>
             <ion-col size="12" sizeLg="6">
               <ion-card-header>
-                <ion-text><span class="text-blue cursor-pointer">GUIAS DE VIAGEM</span> | <span class="text-blue cursor-pointer">ÍNDICE DO SITE</span></ion-text>
+                <ion-text
+                  ><span class="text-blue cursor-pointer">GUIAS DE VIAGEM</span>
+                  |
+                  <span class="text-blue cursor-pointer"
+                    >ÍNDICE DO SITE</span
+                  ></ion-text
+                >
               </ion-card-header>
-            
+
               <ion-card-content>
                 <ul class="text-uppercase text-start mt-4 mb-5 text-dark">
                   <li>Suporte e perguntas frequentes</li>
@@ -37,11 +113,15 @@
                   <li>Cadastrar-se como um hotel</li>
                 </ul>
                 <ion-text class="text-uppercase small">
-                  * alguns hotéis exigem que o cancelamento seja feito mais de 24 horas antes do check-in. veja mais detalhes no site.
-                  <br><br>
+                  * alguns hotéis exigem que o cancelamento seja feito mais de
+                  24 horas antes do check-in. veja mais detalhes no site.
+                  <br /><br />
                   © 2022 (NOME DO SITE) todos os direitos reservados.
-                  <br><br>
-                  (nome do site) e o logotipo são marcas registradas e/ou de serviço da (nome do site). as demais marcas registradas mencionadas aqui são propriedade  de seus respectivos proprietários.
+                  <br /><br />
+                  (nome do site) e o logotipo são marcas registradas e/ou de
+                  serviço da (nome do site). as demais marcas registradas
+                  mencionadas aqui são propriedade de seus respectivos
+                  proprietários.
                 </ion-text>
               </ion-card-content>
             </ion-col>

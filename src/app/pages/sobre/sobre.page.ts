@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-sobre',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sobre.page.scss'],
 })
 export class SobrePage implements OnInit {
+  hotelItems = null;
 
-  constructor() { }
+  constructor(private httpS: HttpService) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.hotelItems = (await this.httpS.get('hotel-item')) as any[];
   }
-
 }

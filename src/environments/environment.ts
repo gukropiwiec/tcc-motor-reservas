@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'http://localhost:8080/api',
+  mercadoPagoPublicKey: 'TEST-c65392e3-7772-466b-92c1-3034803e9a82',
 };
 
 /*

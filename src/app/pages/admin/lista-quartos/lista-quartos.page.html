@@ -5,64 +5,49 @@
       <ion-col>
         <ion-card class="card-background-gray my-4">
           <ion-card-content>
+            <ion-button id="trigger-modal">Adicionar Quarto</ion-button>
             <ion-card>
               <ion-card-content>
-                <div class="table-responsive">
+                <div class="table-responsive" *ngIf="quartos.length > 0">
                   <table class="table">
                     <thead>
                       <tr>
-                        <th scope="col">Reserva</th>
-                        <th scope="col">Check-in</th>
-                        <th scope="col">Check-out</th>
-                        <th scope="col">Hóspedes</th>
-                        <th scope="col">Quarto</th>
-                        <th scope="col">Total</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Quantidade</th>
+                        <th scope="col">Capacidade</th>
                         <th scope="col">Opções</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">#0006</th>
-                        <td>00/00/0000</td>
-                        <td>00/00/0000</td>
-                        <td>2 adultos 1 Criança</td>
-                        <td>Quarto Casal</td>
-                        <td><strong>R$ 150,00</strong></td>
-                        <td><strong>encerrado</strong></td>
-                        <td><ion-icon style="font-size: 1.5rem;" class="mx-2" name="pencil"></ion-icon> <ion-icon style="font-size: 1.5rem;" class="mx-2" name="information-circle-outline"></ion-icon> <ion-icon style="font-size: 1.5rem;" class="mx-2" name="log-out-outline"></ion-icon> <ion-icon style="font-size: 1.5rem;" class="mx-2 logout" name="log-out-outline"></ion-icon> <ion-icon style="font-size: 1.5rem;" class="mx-2" name="calendar-clear-outline"></ion-icon></td>
+                      <tr *ngFor="let quarto of quartos">
+                        <th scope="row">{{quarto.id}}</th>
+                        <td>{{quarto.name}}</td>
+                        <td>{{quarto.description}}</td>
+                        <td>{{quarto.quantity}}</td>
+                        <td>{{quarto.capacity}}</td>
+                        <td>
+                          <ion-icon
+                            style="font-size: 1.5rem"
+                            class="mx-2 cursor-pointer"
+                            name="pencil"
+                            color="primary"
+                          ></ion-icon>
+                          <ion-icon
+                            style="font-size: 1.5rem"
+                            class="mx-2 cursor-pointer"
+                            name="trash-outline"
+                            color="danger"
+                            (click)="deleteRoom(quarto)"
+                          ></ion-icon>
+                        </td>
                       </tr>
-                      <tr>
-                        <th scope="row">#0006</th>
-                        <td>00/00/0000</td>
-                        <td>00/00/0000</td>
-                        <td>2 adultos 1 Criança</td>
-                        <td>Quarto Casal</td>
-                        <td><strong>R$ 150,00</strong></td>
-                        <td>cancelado</td>
-                        <td><ion-icon style="font-size: 1.5rem;" class="mx-2" name="pencil"></ion-icon> <ion-icon style="font-size: 1.5rem;" class="mx-2" name="information-circle-outline"></ion-icon> <ion-icon style="font-size: 1.5rem;" class="mx-2" name="log-out-outline"></ion-icon> <ion-icon style="font-size: 1.5rem;" class="mx-2 logout" name="log-out-outline"></ion-icon> <ion-icon style="font-size: 1.5rem;" class="mx-2" name="calendar-clear-outline"></ion-icon></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">#0006</th>
-                        <td>00/00/0000</td>
-                        <td>00/00/0000</td>
-                        <td>2 adultos 1 Criança</td>
-                        <td>Quarto Casal</td>
-                        <td><strong>R$ 150,00</strong></td>
-                        <td><strong class="text-success">em andamento</strong></td>
-                        <td><ion-icon style="font-size: 1.5rem;" class="mx-2" name="pencil"></ion-icon> <ion-icon style="font-size: 1.5rem;" class="mx-2" name="information-circle-outline"></ion-icon> <ion-icon style="font-size: 1.5rem;" class="mx-2" name="log-out-outline"></ion-icon> <ion-icon style="font-size: 1.5rem;" class="mx-2 logout" name="log-out-outline"></ion-icon> <ion-icon style="font-size: 1.5rem;" class="mx-2" name="calendar-clear-outline"></ion-icon></td>
-                      </tr>
-                      <tr *ngFor="let n of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
-                        <th scope="row">#0006</th>
-                        <td>00/00/0000</td>
-                        <td>00/00/0000</td>
-                        <td>2 adultos 1 Criança</td>
-                        <td>Quarto Casal</td>
-                        <td><strong>R$ 150,00</strong></td>
-                        <td><strong class="text-danger">check-in pendente</strong></td>
-                        <td><ion-icon style="font-size: 1.5rem;" class="mx-2" name="pencil"></ion-icon> <ion-icon style="font-size: 1.5rem;" class="mx-2" name="information-circle-outline"></ion-icon> <ion-icon style="font-size: 1.5rem;" class="mx-2" name="log-out-outline"></ion-icon> <ion-icon style="font-size: 1.5rem;" class="mx-2 logout" name="log-out-outline"></ion-icon> <ion-icon style="font-size: 1.5rem;" class="mx-2" name="calendar-clear-outline"></ion-icon></td>
-                      </tr>
+                    </tbody>
                   </table>
+                </div>
+                <div *ngIf="quartos.length === 0">
+                  <b>Nenhum registro encontrado.</b>
                 </div>
               </ion-card-content>
             </ion-card>
@@ -71,5 +56,72 @@
       </ion-col>
     </ion-row>
   </div>
+  <ion-modal
+    trigger="trigger-modal"
+    [isOpen]="false"
+    style="--max-height: 80vh"
+  >
+    <ng-template>
+      <ion-content class="background-modal">
+        <div class="p-5 text-center">
+          <h4 class="mb-5">Adicionar Novo Quarto</h4>
+          <form [formGroup]="formInput">
+            <ion-item>
+              <ion-label position="floating">Nome</ion-label>
+              <ion-input id="name" formControlName="name"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Descrição</ion-label>
+              <ion-input
+                id="description"
+                formControlName="description"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Quantidade</ion-label>
+              <ion-input
+                type="number"
+                id="quantity"
+                formControlName="quantity"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Capacidade</ion-label>
+              <ion-input
+                type="number"
+                id="capacity"
+                formControlName="capacity"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Preço</ion-label>
+              <ion-input
+                type="number"
+                id="price"
+                formControlName="price"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="fixed">Foto Principal</ion-label>
+              <ion-input
+                type="file"
+                (change)="readFiles($event)"
+                accept=".jpg, .jpeg, .png"
+                multiple
+              ></ion-input>
+            </ion-item>
+            <div class="mt-3">
+              <ion-button color="success" (click)="createRoom()"
+                >Salvar</ion-button
+              >
+              <ion-button color="danger" (click)="dismissModal()"
+                >Cancelar</ion-button
+              >
+            </div>
+          </form>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
   <app-footer></app-footer>
 </ion-content>

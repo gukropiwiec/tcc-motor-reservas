@@ -2,7 +2,10 @@
   <div id="container" class="container mt-5">
     <section class="banner mt-2 mb-5">
       <ion-row class="h-100">
-        <ion-col style="display: flex;" class="h-100 align-items-center justify-content-center ion-hide-lg-down">
+        <ion-col
+          style="display: flex"
+          class="h-100 align-items-center justify-content-center ion-hide-lg-down"
+        >
           <h4 class="banner-text">
             UM LUGAR ESPECIAL ONDE VOCÊ PODE FICAR E RELAXAR
           </h4>
@@ -16,32 +19,37 @@
             <ion-card-content>
               <ion-row>
                 <ion-col>
-                  <ion-item button="true" id="open-date-input" class="input-card" lines="none">
-                     <ion-label><ion-icon slot="start" icon="calendar-clear-outline"></ion-icon> Check-in</ion-label>
-                     <ion-text slot="end" class="text-center">{{ checkinDate }}</ion-text>
-                     <ion-popover trigger="open-date-input" show-backdrop="false">
-                       <ng-template>
-                         <ion-datetime
-                           #popoverDatetime1
-                           presentation="date"
-                           (ionChange)="checkinDate = formatDate(popoverDatetime1.value)"
-                         ></ion-datetime>
-                       </ng-template>
-                     </ion-popover>
-                   </ion-item>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col>
-                  <ion-item button="true" id="open-date-input2" class="input-card" lines="none">
-                    <ion-label><ion-icon slot="start" icon="calendar-clear-outline"></ion-icon> Check-out</ion-label>
-                    <ion-text slot="end" class="text-center">{{ checkoutDate }}</ion-text>
-                    <ion-popover trigger="open-date-input2" show-backdrop="false">
+                  <ion-item
+                    button="true"
+                    id="open-date-input-home"
+                    class="input-card"
+                    lines="none"
+                  >
+                    <ion-label
+                      ><ion-icon
+                        slot="start"
+                        icon="calendar-clear-outline"
+                      ></ion-icon>
+                      Check-in</ion-label
+                    >
+                    <ion-text slot="end" class="text-center"
+                      >{{ checkInDateShow }}</ion-text
+                    >
+                    <ion-popover
+                      trigger="open-date-input-home"
+                      show-backdrop="false"
+                    >
                       <ng-template>
                         <ion-datetime
-                          #popoverDatetime2
+                          #popoverDatetime1
                           presentation="date"
-                          (ionChange)="checkoutDate = formatDate(popoverDatetime2.value)"
+                          (ionChange)="formatCheckInDate(popoverDatetime1.value)"
+                          [min]="today"
+                          max="2023-12-31"
+                          [showDefaultButtons]="true"
+                          doneText="Confirmar"
+                          cancelText="Cancelar"
+                          id="checkinElement"
                         ></ion-datetime>
                       </ng-template>
                     </ion-popover>
@@ -50,9 +58,63 @@
               </ion-row>
               <ion-row>
                 <ion-col>
-                  <ion-item id="open-date-input2" class="input-card" lines="none">
-                    <ion-label><ion-icon slot="start" icon="calendar-clear-outline"></ion-icon> Hóspedes</ion-label>
-                    <ion-select placeholder="-">
+                  <ion-item
+                    button="true"
+                    id="open-date-input2-home"
+                    class="input-card"
+                    lines="none"
+                  >
+                    <ion-label
+                      ><ion-icon
+                        slot="start"
+                        icon="calendar-clear-outline"
+                      ></ion-icon>
+                      Check-out</ion-label
+                    >
+                    <ion-text slot="end" class="text-center"
+                      >{{ checkOutDateShow }}</ion-text
+                    >
+                    <ion-popover
+                      trigger="open-date-input2-home"
+                      show-backdrop="false"
+                    >
+                      <ng-template>
+                        <ion-datetime
+                          #popoverDatetime2
+                          presentation="date"
+                          (ionChange)="formatCheckOutDate(popoverDatetime2.value)"
+                          [min]="today"
+                          [showDefaultButtons]="true"
+                          doneText="Confirmar"
+                          cancelText="Cancelar"
+                          max="2023-12-31"
+                          id="checkoutElement"
+                          [size]="'fixed'"
+                        ></ion-datetime>
+                      </ng-template>
+                    </ion-popover>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item
+                    id="open-date-input2"
+                    class="input-card"
+                    lines="none"
+                  >
+                    <ion-label
+                      ><ion-icon
+                        slot="start"
+                        icon="calendar-clear-outline"
+                      ></ion-icon>
+                      Adultos</ion-label
+                    >
+                    <ion-select
+                      placeholder="-"
+                      id="qtyAdults"
+                      [value]="qtyAdults"
+                    >
                       <ion-select-option value="1">1</ion-select-option>
                       <ion-select-option value="2">2</ion-select-option>
                       <ion-select-option value="3">3</ion-select-option>
@@ -65,9 +127,24 @@
               </ion-row>
               <ion-row>
                 <ion-col>
-                  <ion-item id="open-date-input2" class="input-card" lines="none">
-                    <ion-label><ion-icon slot="start" icon="calendar-clear-outline"></ion-icon> Quartos</ion-label>
-                    <ion-select placeholder="-">
+                  <ion-item
+                    id="open-date-input2"
+                    class="input-card"
+                    lines="none"
+                  >
+                    <ion-label
+                      ><ion-icon
+                        slot="start"
+                        icon="calendar-clear-outline"
+                      ></ion-icon>
+                      Crianças</ion-label
+                    >
+                    <ion-select
+                      placeholder="-"
+                      id="qtyChildren"
+                      [value]="qtyChildren"
+                    >
+                      <ion-select-option value="0">0</ion-select-option>
                       <ion-select-option value="1">1</ion-select-option>
                       <ion-select-option value="2">2</ion-select-option>
                       <ion-select-option value="3">3</ion-select-option>
@@ -80,7 +157,12 @@
               </ion-row>
               <ion-row>
                 <ion-col>
-                  <ion-button color="danger" expand="block" [routerLink]="['/quartos']">Pesquisar</ion-button>
+                  <ion-button
+                    color="danger"
+                    expand="block"
+                    (click)="buscarQuartos()"
+                    >Pesquisar</ion-button
+                  >
                 </ion-col>
               </ion-row>
             </ion-card-content>
@@ -91,36 +173,28 @@
     <section class="nossos-quartos">
       <ion-row>
         <ion-col size="auto">
-          <h5 class="fw-bold divider-title">NOSSOS QUARTOS</h5>
+          <h5 class="fw-bold divider-title">
+            NOSSOS QUARTOS - <a [routerLink]="['/quartos']">Ver todos</a>
+          </h5>
         </ion-col>
-        <ion-col><hr></ion-col>
+        <ion-col><hr /></ion-col>
       </ion-row>
       <ion-row>
-        <ion-col>
-          <div class="card-quartos d-flex align-items-center justify-content-center cursor-pointer" [routerLink]="['/detalhes-quarto/1']" style="background-image: url('assets/images/quarto-exemplo-1.png');">
+        <ion-col *ngFor="let quarto of nossosQuartos">
+          <div
+            class="card-quartos d-flex align-items-center justify-content-center"
+            style="background-image: url({{quarto.images[0]?.url}})"
+          >
             <ion-row>
-              <ion-col><h4 class="text-center">QUARTO DUPLO <br><br> <span class="text-price">R$ 300</span> / noite</h4></ion-col>
-            </ion-row>
-          </div>
-        </ion-col>
-        <ion-col>
-          <div class="card-quartos d-flex align-items-center justify-content-center cursor-pointer" [routerLink]="['/detalhes-quarto/1']" style="background-image: url('assets/images/quarto-exemplo-2.png');">
-            <ion-row>
-              <ion-col><h4 class="text-center">QUARTO EXECUTIVO <br><br> <span class="text-price">R$ 500</span> / noite</h4></ion-col>
-            </ion-row>
-          </div>
-        </ion-col>
-        <ion-col>
-          <div class="card-quartos d-flex align-items-center justify-content-center cursor-pointer" [routerLink]="['/detalhes-quarto/1']" style="background-image: url('assets/images/quarto-exemplo-3.png');">
-            <ion-row>
-              <ion-col><h4 class="text-center">QUARTO DE SOLTEIRO <br><br> <span class="text-price">R$ 250</span> / noite</h4></ion-col>
-            </ion-row>
-          </div>
-        </ion-col>
-        <ion-col>
-          <div class="card-quartos d-flex align-items-center justify-content-center cursor-pointer" [routerLink]="['/detalhes-quarto/1']" style="background-image: url('assets/images/quarto-exemplo-4.png');">
-            <ion-row>
-              <ion-col><h4 class="text-center">VIP SUITE <br><br> <span class="text-price">R$ 650</span> / noite</h4></ion-col>
+              <ion-col
+                ><h4 class="text-center text-image">
+                  {{quarto.name}} <br /><br />
+                  <span class="text-price"
+                    >R$ {{quarto.tariffs[0]?.price}}</span
+                  >
+                  / noite
+                </h4></ion-col
+              >
             </ion-row>
           </div>
         </ion-col>
@@ -131,15 +205,22 @@
         <ion-col size="auto">
           <h5 class="fw-bold divider-title">O QUE OFERECEMOS</h5>
         </ion-col>
-        <ion-col><hr></ion-col>
+        <ion-col><hr /></ion-col>
       </ion-row>
       <ion-row>
         <ion-col size="12" sizeLg="4">
           <ion-card class="card-promotions">
             <ion-card-content class="text-center">
               <ion-icon icon="business" size="large"></ion-icon>
-              <h5 class="text-warning fw-bold title-card-promotions-section my-3">ACOMODAÇÕES</h5>
-              <h6 class="ion-text-uppercase">Nossos quartos oferecem acomodações confortáveis ​​com Wi-Fi gratuito, aquecimento central etc.</h6>
+              <h5
+                class="text-warning fw-bold title-card-promotions-section my-3"
+              >
+                ACOMODAÇÕES
+              </h5>
+              <h6 class="ion-text-uppercase">
+                Nossos quartos oferecem acomodações confortáveis ​​com Wi-Fi
+                gratuito, aquecimento central etc.
+              </h6>
             </ion-card-content>
           </ion-card>
         </ion-col>
@@ -147,8 +228,15 @@
           <ion-card class="card-promotions">
             <ion-card-content class="text-center">
               <ion-icon icon="fast-food" size="large"></ion-icon>
-              <h5 class="text-warning fw-bold title-card-promotions-section my-3">JANTAR</h5>
-              <h6 class="ion-text-uppercase">Jante com estilo e no seu melhor no Restaurante Resort, que serve uma grande variedade de gostos.</h6>
+              <h5
+                class="text-warning fw-bold title-card-promotions-section my-3"
+              >
+                JANTAR
+              </h5>
+              <h6 class="ion-text-uppercase">
+                Jante com estilo e no seu melhor no Restaurante Resort, que
+                serve uma grande variedade de gostos.
+              </h6>
             </ion-card-content>
           </ion-card>
         </ion-col>
@@ -156,8 +244,15 @@
           <ion-card class="card-promotions">
             <ion-card-content class="text-center">
               <ion-icon icon="star" size="large"></ion-icon>
-              <h5 class="text-warning fw-bold title-card-promotions-section my-3">SERVIÇO DE QUARTO</h5>
-              <h6 class="ion-text-uppercase">O serviço de quarto está disponível 24 horas, incluindo entregas de café da manhã.</h6>
+              <h5
+                class="text-warning fw-bold title-card-promotions-section my-3"
+              >
+                SERVIÇO DE QUARTO
+              </h5>
+              <h6 class="ion-text-uppercase">
+                O serviço de quarto está disponível 24 horas, incluindo entregas
+                de café da manhã.
+              </h6>
             </ion-card-content>
           </ion-card>
         </ion-col>
@@ -168,15 +263,22 @@
         <ion-col size="auto">
           <h5 class="fw-bold divider-title">COMO RESERVAR UM QUARTO</h5>
         </ion-col>
-        <ion-col><hr></ion-col>
+        <ion-col><hr /></ion-col>
       </ion-row>
       <ion-row>
         <ion-col size="12" sizeLg="4">
           <ion-card class="card-promotions">
             <ion-card-content class="text-center">
               <ion-icon icon="bed" size="large"></ion-icon>
-              <h5 class="text-warning fw-bold title-card-promotions-section my-3">SELECIONE UMA ACOMODAÇÃO</h5>
-              <h6 class="ion-text-uppercase">Você também pode selecionar um tipo de quarto exato durante a confirmação da reserva.</h6>
+              <h5
+                class="text-warning fw-bold title-card-promotions-section my-3"
+              >
+                SELECIONE UMA ACOMODAÇÃO
+              </h5>
+              <h6 class="ion-text-uppercase">
+                Você também pode selecionar um tipo de quarto exato durante a
+                confirmação da reserva.
+              </h6>
             </ion-card-content>
           </ion-card>
         </ion-col>
@@ -184,8 +286,15 @@
           <ion-card class="card-promotions">
             <ion-card-content class="text-center">
               <ion-icon icon="list" size="large"></ion-icon>
-              <h5 class="text-warning fw-bold title-card-promotions-section my-3">PREENCHA O FORMULÁRIO ONLINE</h5>
-              <h6 class="ion-text-uppercase">Tudo começa com o preenchimento do formulário de reserva em nosso site.</h6>
+              <h5
+                class="text-warning fw-bold title-card-promotions-section my-3"
+              >
+                PREENCHA O FORMULÁRIO ONLINE
+              </h5>
+              <h6 class="ion-text-uppercase">
+                Tudo começa com o preenchimento do formulário de reserva em
+                nosso site.
+              </h6>
             </ion-card-content>
           </ion-card>
         </ion-col>
@@ -193,8 +302,15 @@
           <ion-card class="card-promotions">
             <ion-card-content class="text-center">
               <ion-icon icon="bag-check" size="large"></ion-icon>
-              <h5 class="text-warning fw-bold title-card-promotions-section my-3">CHECK-IN NO HOTEL</h5>
-              <h6 class="ion-text-uppercase">Ao chegar ao hotel, não se esqueça de fazer o check-in na recepção.</h6>
+              <h5
+                class="text-warning fw-bold title-card-promotions-section my-3"
+              >
+                CHECK-IN NO HOTEL
+              </h5>
+              <h6 class="ion-text-uppercase">
+                Ao chegar ao hotel, não se esqueça de fazer o check-in na
+                recepção.
+              </h6>
             </ion-card-content>
           </ion-card>
         </ion-col>
@@ -203,4 +319,3 @@
   </div>
   <app-footer></app-footer>
 </ion-content>
-

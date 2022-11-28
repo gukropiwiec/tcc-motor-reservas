@@ -8,65 +8,12 @@
           </ion-card-header>
           <ion-card-content>
             <ion-accordion-group [multiple]="true">
-              <ion-accordion value="1">
+              <ion-accordion *ngFor="let reserva of reservas; let i = index;" [value]="i+1">
                 <ion-item slot="header">
-                  <ion-label>Pedido: <span class="text-danger">#0007 </span> <span class="text-info"> CHECK-IN PENDENTE</span></ion-label>
+                  <ion-label>Pedido: <span class="text-danger">#{{reserva.id}} </span> <span class="{{reserva.status === 'Pago' ? 'text-success' : 'text-info'}}"> Status: {{reserva.status}}</span></ion-label>
                 </ion-item>
                 <ion-list slot="content">
-                  1 Quarto - 2 Pessoas - 3 Diárias - 09-09-2022 - 13:30 - CHECK-IN PENDENTE 
-                </ion-list>
-              </ion-accordion>
-              <ion-accordion value="2">
-                <ion-item slot="header">
-                  <ion-label>Pedido: <span class="text-danger">#0006 </span> <span class="text-blue"> ENCERRADO</span></ion-label>
-                </ion-item>
-                <ion-list slot="content">
-                  1 Quarto - 2 Pessoas - 3 Diárias - 09-09-2022 - 13:30 - ENCERRADO 
-                </ion-list>
-              </ion-accordion>
-              <ion-accordion value="3">
-                <ion-item slot="header">
-                  <ion-label>Pedido: <span class="text-danger">#0005 </span> <span class="text-blue"> ENCERRADO</span></ion-label>
-                </ion-item>
-            
-                <ion-list slot="content">
-                  1 Quarto - 2 Pessoas - 3 Diárias - 09-09-2022 - 13:30 - ENCERRADO 
-                </ion-list>
-              </ion-accordion>
-              <ion-accordion value="4">
-                <ion-item slot="header">
-                  <ion-label>Pedido: <span class="text-danger">#0004 </span> <span class="text-blue"> ENCERRADO</span></ion-label>
-                </ion-item>
-            
-                <ion-list slot="content">
-                  1 Quarto - 2 Pessoas - 3 Diárias - 09-09-2022 - 13:30 - ENCERRADO 
-                </ion-list>
-              </ion-accordion>
-              <ion-accordion value="5">
-                <ion-item slot="header">
-                  <ion-label>Pedido: <span class="text-danger">#0003 </span> <span class="text-blue"> ENCERRADO</span></ion-label>
-                </ion-item>
-            
-                <ion-list slot="content">
-                  1 Quarto - 2 Pessoas - 3 Diárias - 09-09-2022 - 13:30 - ENCERRADO 
-                </ion-list>
-              </ion-accordion>
-              <ion-accordion value="6">
-                <ion-item slot="header">
-                  <ion-label>Pedido: <span class="text-danger">#0002 </span> <span class="text-blue"> ENCERRADO</span></ion-label>
-                </ion-item>
-            
-                <ion-list slot="content">
-                  1 Quarto - 2 Pessoas - 3 Diárias - 09-09-2022 - 13:30 - ENCERRADO 
-                </ion-list>
-              </ion-accordion>
-              <ion-accordion value="7">
-                <ion-item slot="header">
-                  <ion-label>Pedido: <span class="text-danger">#0001 </span> <span class="text-blue"> ENCERRADO</span></ion-label>
-                </ion-item>
-            
-                <ion-list slot="content">
-                  1 Quarto - 2 Pessoas - 3 Diárias - 09-09-2022 - 13:30 - ENCERRADO 
+                  {{reserva.room.name}} - Preço total: R${{reserva.finalPrice}} - Status: {{reserva.status}}
                 </ion-list>
               </ion-accordion>
             </ion-accordion-group>

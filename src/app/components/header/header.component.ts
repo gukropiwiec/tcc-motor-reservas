@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, PopoverController } from '@ionic/angular';
+import { HotelService } from 'src/app/services/hotel.service';
+import { HttpService } from 'src/app/services/http.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -10,15 +12,23 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HeaderComponent implements OnInit {
   public popoverOpen = false;
+  hoteis = [];
 
   constructor(
     public userS: UserService,
+    public hotelS: HotelService,
     private alertController: AlertController,
     private popoverController: PopoverController,
-    private router: Router
+    private router: Router,
+    private httpS: HttpService
   ) {}
 
-  ngOnInit() {}
+  async ngOnInit() {
+    this.hoteis = (await this.httpS.get('hotel')) as any[];
+    if (!this.hotelS.hotel) {
+      this.hotelS.hotel = this.hoteis[0];
+    }
+  }
 
   logout() {
     this.presentAlertConfirm();
@@ -28,7 +38,11 @@ export class HeaderComponent implements OnInit {
     await this.popoverController.dismiss();
   }
 
-  async presentAlertConfirm() {
+  setHotel(hotel) {
+    this.hotelS.hotel = hotel;
+  }
+
+  private async presentAlertConfirm() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Confirmar',
@@ -46,6 +60,7 @@ export class HeaderComponent implements OnInit {
           handler: () => {
             this.userS.user = null;
             this.userS.pagesMenuUser = true;
+            this.userS.token = null;
             this.popoverOpen = false;
             this.router.navigateByUrl('/');
           },

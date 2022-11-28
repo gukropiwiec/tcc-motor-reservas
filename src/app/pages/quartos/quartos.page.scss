@@ -1,27 +1,28 @@
 .card-info {
-    background-color: #F0F0F5;
-    border-radius: 5px;
-    min-height: 279px;
+  background-color: #f0f0f5;
+  border-radius: 5px;
+  min-height: 279px;
 
-    h4 {
-        color: #E02041;
-        font-weight: 700;
-    }
+  h4 {
+    color: #e02041;
+    font-weight: 700;
+  }
 
-    .price {
-        font-size: 1.5rem;
-    }
+  .price {
+    font-size: 1.5rem;
+  }
 
-    img {
-        height: 100%;
-    }
+  img {
+    height: 100%;
+  }
 }
 
 .img-quarto {
-    border-radius: 5px;
+  border-radius: 5px;
+  max-width: 400px;
 }
 
 .btn-reservar {
-    --border-radius: 20px;
-    font-weight: 700;
+  --border-radius: 20px;
+  font-weight: 700;
 }

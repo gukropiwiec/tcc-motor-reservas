@@ -8,25 +8,25 @@
             <ion-row>
               <ion-col>
                 <ion-card>
-                  <ion-card-header>30</ion-card-header>
-                  <ion-card-content>Acomadações Cadastradas</ion-card-content>
+                  <ion-card-header>{{quartos.length}}</ion-card-header>
+                  <ion-card-content>Acomodações Cadastradas</ion-card-content>
                 </ion-card>
               </ion-col>
               <ion-col>
                 <ion-card>
-                  <ion-card-header>18</ion-card-header>
-                  <ion-card-content>Acomadações Ocupadas</ion-card-content>
+                  <ion-card-header>{{reservas.length}}</ion-card-header>
+                  <ion-card-content>Quantitade Reservas</ion-card-content>
                 </ion-card>
               </ion-col>
               <ion-col>
                 <ion-card>
-                  <ion-card-header>12</ion-card-header>
-                  <ion-card-content>Acomadações Livres</ion-card-content>
+                  <ion-card-header>{{quartosLivres.length}}</ion-card-header>
+                  <ion-card-content>Acomodações Livres</ion-card-content>
                 </ion-card>
               </ion-col>
               <ion-col>
                 <ion-card>
-                  <ion-card-header>5</ion-card-header>
+                  <ion-card-header>{{checkins.length}}</ion-card-header>
                   <ion-card-content>Check-in's hoje</ion-card-content>
                 </ion-card>
               </ion-col>
@@ -35,12 +35,12 @@
         </ion-card>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <!-- <ion-row>
       <ion-col size="12" sizeMd="8">
         <ion-card>
           <ion-card-header>Acomodações Reservadas por Mês</ion-card-header>
           <ion-card-content>
-            <img src="assets/images/dash-grafico.jpg">
+            <img src="assets/images/dash-grafico.jpg" />
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -48,11 +48,11 @@
         <ion-card>
           <ion-card-header>% Acomodações Reservadas</ion-card-header>
           <ion-card-content class="text-center">
-            <img src="assets/images/dash-grafico-2.jpg">
+            <img src="assets/images/dash-grafico-2.jpg" />
           </ion-card-content>
         </ion-card>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
     <h4 class="mt-5 mb-3">ÚLTIMAS RESERVAS</h4>
     <ion-row>
       <ion-col>
@@ -60,32 +60,63 @@
           <ion-card-content>
             <ion-card>
               <ion-card-content>
-                <div class="table-responsive">
+                <div class="table-responsive" *ngIf="reservas.length > 0">
                   <table class="table">
                     <thead>
                       <tr>
-                        <th scope="col">Reserva</th>
-                        <th scope="col">Check-in</th>
-                        <th scope="col">Check-out</th>
-                        <th scope="col">Hóspedes</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Usuário</th>
                         <th scope="col">Quarto</th>
                         <th scope="col">Total</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Opções</th>
+                        <th scope="col">Entrada</th>
+                        <th scope="col">Saída</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let n of [1, 2, 3, 4, 5, 6, 7, 8]">
-                        <th scope="row">#0006</th>
-                        <td>00/00/0000</td>
-                        <td>00/00/0000</td>
-                        <td>2 adultos 1 Criança</td>
-                        <td>Quarto Casal</td>
-                        <td><strong>R$ 150,00</strong></td>
-                        <td><strong class="text-danger">check-in pendente</strong></td>
-                        <td><ion-icon style="font-size: 1.5rem;" class="mx-2" name="pencil"></ion-icon> <ion-icon style="font-size: 1.5rem;" class="mx-2" name="information-circle-outline"></ion-icon> <ion-icon style="font-size: 1.5rem;" class="mx-2" name="log-out-outline"></ion-icon> <ion-icon style="font-size: 1.5rem;" class="mx-2 logout" name="log-out-outline"></ion-icon></td>
+                      <tr *ngFor="let reserva of reservas">
+                        <th scope="row">{{reserva.id}}</th>
+                        <td>
+                          {{reserva.user.firstName}} {{reserva.user.lastName}}
+                        </td>
+                        <td>{{reserva.room.name}}</td>
+                        <td><strong>R$ {{reserva.finalPrice}}</strong></td>
+                        <td><strong>{{reserva.status}}</strong></td>
+                        <td>{{reserva.startDate | date:'shortDate'}}</td>
+                        <td>{{reserva.endDate | date:'shortDate'}}</td>
+                        <!-- <td>
+                          <ion-icon
+                            style="font-size: 1.5rem"
+                            class="mx-2"
+                            name="pencil"
+                          ></ion-icon>
+                          <ion-icon
+                            style="font-size: 1.5rem"
+                            class="mx-2"
+                            name="information-circle-outline"
+                          ></ion-icon>
+                          <ion-icon
+                            style="font-size: 1.5rem"
+                            class="mx-2"
+                            name="log-out-outline"
+                          ></ion-icon>
+                          <ion-icon
+                            style="font-size: 1.5rem"
+                            class="mx-2 logout"
+                            name="log-out-outline"
+                          ></ion-icon>
+                          <ion-icon
+                            style="font-size: 1.5rem"
+                            class="mx-2"
+                            name="calendar-clear-outline"
+                          ></ion-icon>
+                        </td> -->
                       </tr>
+                    </tbody>
                   </table>
+                </div>
+                <div *ngIf="reservas.length === 0">
+                  <b>Nenhum registro encontrado.</b>
                 </div>
               </ion-card-content>
             </ion-card>

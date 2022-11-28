@@ -1,4 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { IonDatetime, ToastController } from '@ionic/angular';
+import { format, parseISO } from 'date-fns';
+import * as moment from 'moment';
+import { HttpService } from 'src/app/services/http.service';
+import { UserService } from 'src/app/services/user.service';
+import { environment } from 'src/environments/environment';
+
+// eslint-disable-next-line @typescript-eslint/naming-convention
+declare const MercadoPago: any;
+
+interface BuscaReservaQuarto {
+  checkInDate: string;
+  checkOutDate: string;
+  qtyAdults: number;
+  qtyChildren: number;
+  roomId?: string;
+}
 
 @Component({
   selector: 'app-quartos',
@@ -6,10 +24,167 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./quartos.page.scss'],
 })
 export class QuartosPage implements OnInit {
+  @ViewChild(IonDatetime, { static: true }) datetime: any;
+  quartos = [];
 
-  constructor() { }
+  today = moment().format('YYYY-MM-DD');
 
-  ngOnInit() {
+  checkInDate = null;
+  checkInDateShow = '-';
+  checkOutDate = null;
+  checkOutDateShow = '-';
+  qtyAdults = 0;
+  qtyChildren = 0;
+  formBusca: BuscaReservaQuarto;
+  busca = false;
+  isModalOpen = false;
+  preferenceUrl = null;
+
+  loadingReserva = false;
+
+  constructor(
+    private httpS: HttpService,
+    private toastController: ToastController,
+    private router: Router,
+    private userS: UserService
+  ) {}
+
+  async ngOnInit() {
+    const data = history.state;
+    delete data.navigationId;
+
+    if (Object.keys(data).length > 1) {
+      this.formBusca = data;
+      this.quartos = (await this.httpS.post('room/available', data)) as any[];
+      this.busca = true;
+    } else {
+      this.quartos = (await this.httpS.get('room')) as any[];
+      this.busca = false;
+    }
   }
 
+  formatCheckOutDate(value: string) {
+    this.checkOutDateShow = this.formatDate(value);
+    this.checkOutDate = this.formatDate(value, 'yyyy-MM-dd');
+  }
+
+  formatCheckInDate(value: string) {
+    this.checkInDateShow = this.formatDate(value);
+    this.checkInDate = this.formatDate(value, 'yyyy-MM-dd');
+  }
+
+  async buscarQuartos() {
+    const qtyAdultsEl = (
+      document.getElementById('qtyAdultsEl') as HTMLInputElement
+    ).value;
+    const qtyChildrenEl = (
+      document.getElementById('qtyChildrenEl') as HTMLInputElement
+    ).value;
+
+    if (
+      !qtyAdultsEl ||
+      !qtyChildrenEl ||
+      !this.checkInDate ||
+      !this.checkOutDate
+    ) {
+      this.presentToast(
+        'Por favor, preencha todos os campos para pesquisar um quarto.',
+        'danger'
+      );
+      return;
+    }
+
+    this.formBusca = {
+      checkInDate: this.checkInDate,
+      checkOutDate: this.checkOutDate,
+      qtyAdults: Number(qtyAdultsEl),
+      qtyChildren: Number(qtyChildrenEl),
+    };
+
+    this.quartos = (await this.httpS.post(
+      'room/available',
+      this.formBusca
+    )) as any[];
+    this.busca = true;
+  }
+
+  async reservar(quartoId: string) {
+    if (!this.userS.token || !this.userS.userInfo) {
+      this.presentToast(
+        'Favor fazer o login para realizar uma reserva.',
+        'primary'
+      );
+      return;
+    }
+
+    this.formBusca.roomId = quartoId;
+    if (!this.formBusca.checkInDate || !this.formBusca.checkOutDate) {
+      this.presentToast(
+        'Um erro ocorreu ao tentar reservar o quarto. Por favor, refaça a pesquisa novamente para reservar um quarto.',
+        'danger'
+      );
+      return;
+    }
+
+    this.loadingReserva = true;
+
+    const bookingRes: any = await this.httpS.post('booking', this.formBusca);
+
+    this.preferenceUrl = bookingRes.preference_url;
+
+    const mp = new MercadoPago(environment.mercadoPagoPublicKey, {
+      locale: 'en-US',
+    });
+    const checkout = mp.checkout({
+      preference: {
+        id: bookingRes.preference_id,
+      },
+      autoOpen: true,
+    });
+    checkout.render({
+      container: '.mp-container',
+      label: 'Realizar Pagamento',
+    });
+    this.setModalOpen(true);
+    this.loadingReserva = false;
+  }
+
+  openDetalhes(quartoId: string) {
+    this.router.navigateByUrl(`/detalhes-quarto/${quartoId}`);
+  }
+
+  async limparFiltros() {
+    this.formBusca.checkInDate = null;
+    this.formBusca.checkOutDate = null;
+    this.formBusca.qtyAdults = null;
+    this.formBusca.qtyChildren = null;
+    this.checkInDate = null;
+    this.checkInDateShow = '-';
+    this.checkOutDate = null;
+    this.checkOutDateShow = '-';
+    this.qtyAdults = 0;
+    this.qtyChildren = 0;
+    this.busca = false;
+    this.quartos = (await this.httpS.get('room')) as any[];
+  }
+
+  setModalOpen(isOpen: boolean) {
+    if (!isOpen) {
+      window.location.reload();
+    }
+    this.isModalOpen = isOpen;
+  }
+
+  private formatDate(value: string, pattern = 'dd/MM/yyyy') {
+    return format(parseISO(value), pattern);
+  }
+
+  private async presentToast(message: string, color: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 3000,
+      color,
+    });
+    toast.present();
+  }
 }
