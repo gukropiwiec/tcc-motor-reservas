@@ -5,7 +5,7 @@
       <ion-col>
         <ion-card class="card-background-gray my-4">
           <ion-card-content>
-            <ion-button>Adicionar Usuário</ion-button>
+            <ion-button (click)="setModalUsuarioOpen(true)" *ngIf="userS.userInfo.role.name === 'Admin'">Adicionar Usuário</ion-button>
             <ion-card>
               <ion-card-content>
                 <div class="table-responsive">
@@ -20,6 +20,8 @@
                         <th scope="col">Cidade</th>
                         <th scope="col">Estado</th>
                         <th scope="col">País</th>
+                        <th scope="col">Função</th>
+                        <th scope="col" *ngIf="userS.userInfo.role.name === 'Admin'">Opções</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -34,6 +36,112 @@
                         <td>{{user.addressCity}}</td>
                         <td>{{user.addressDistrict }}</td>
                         <td>{{user.addressCountry}}</td>
+                        <td>{{findUserRole(user.roleId)}}</td>
+                        <td *ngIf="userS.userInfo.role.name === 'Admin'">
+                          <ion-icon
+                            style="font-size: 1.5rem"
+                            class="mx-2 cursor-pointer"
+                            name="pencil"
+                            color="primary"
+                            (click)="setModalUsuarioOpen(true, user, true)"
+                          ></ion-icon>
+                          <ion-modal [isOpen]="isModalUsuarioOpen" [backdropDismiss]="false">
+                            <ng-template>
+                              <ion-header>
+                                <ion-toolbar>
+                                  <ion-title>{{edit ? 'Editar' : 'Cadastrar'}} Usuário</ion-title>
+                                  <ion-buttons slot="end">
+                                    <ion-button (click)="setModalUsuarioOpen(false)">Fechar</ion-button>
+                                  </ion-buttons>
+                                </ion-toolbar>
+                              </ion-header>
+                              <ion-content class="ion-padding">
+                                <ion-row>
+                                  <ion-col size="12" sizeMd="6">
+                                    <ion-item>
+                                      <ion-label position="floating">Primeiro nome</ion-label>
+                                      <ion-input placeholder="Digite o primeiro nome" [(ngModel)]="formUser.firstName"></ion-input>
+                                    </ion-item>
+                                  </ion-col>
+                                  <ion-col size="12" sizeMd="6">
+                                    <ion-item>
+                                      <ion-label position="floating">Sobrenome</ion-label>
+                                      <ion-input placeholder="Digite o sobrenome" [(ngModel)]="formUser.lastName"></ion-input>
+                                    </ion-item>
+                                  </ion-col>
+                                  <ion-col size="12" sizeMd="6">
+                                    <ion-item>
+                                      <ion-label position="floating">Rua</ion-label>
+                                      <ion-input placeholder="Digite a rua" [(ngModel)]="formUser.addressStreet"></ion-input>
+                                    </ion-item>
+                                  </ion-col>
+                                  <ion-col size="12" sizeMd="6">
+                                    <ion-item>
+                                      <ion-label position="floating">Número</ion-label>
+                                      <ion-input type="number" placeholder="Digite o número" [(ngModel)]="formUser.addressNumber"></ion-input>
+                                    </ion-item>
+                                  </ion-col>
+                                  <ion-col size="12" sizeMd="6">
+                                    <ion-item>
+                                      <ion-label position="floating">Bairro</ion-label>
+                                      <ion-input placeholder="Digite o bairro" [(ngModel)]="formUser.addressDistrict"></ion-input>
+                                    </ion-item>
+                                  </ion-col>
+                                  <ion-col size="12" sizeMd="6">
+                                    <ion-item>
+                                      <ion-label position="floating">Cidade</ion-label>
+                                      <ion-input placeholder="Digite a cidade" [(ngModel)]="formUser.addressCity"></ion-input>
+                                    </ion-item>
+                                  </ion-col>
+                                  <ion-col size="12" sizeMd="6">
+                                    <ion-item>
+                                      <ion-label position="floating">País</ion-label>
+                                      <ion-input placeholder="Digite o país" [(ngModel)]="formUser.addressCountry"></ion-input>
+                                    </ion-item>
+                                  </ion-col>
+                                  <ion-col size="12" sizeMd="6">
+                                    <ion-item>
+                                      <ion-label position="floating">CEP</ion-label>
+                                      <ion-input placeholder="Digite o CEP" [(ngModel)]="formUser.addressCep"></ion-input>
+                                    </ion-item>
+                                  </ion-col>
+                                  <ion-col size="12" sizeMd="6">
+                                    <ion-item>
+                                      <ion-label position="floating">Telefone</ion-label>
+                                      <ion-input placeholder="Digite o telefone" [(ngModel)]="formUser.phone"></ion-input>
+                                    </ion-item>
+                                  </ion-col>
+                                  <ion-col size="12" sizeMd="6">
+                                    <ion-item>
+                                      <ion-label position="floating">E-mail</ion-label>
+                                      <ion-input placeholder="Digite o e-mail" [readonly]="edit" [(ngModel)]="formUser.email"></ion-input>
+                                    </ion-item>
+                                  </ion-col>
+                                  <ion-col size="12" sizeMd="6">
+                                    <ion-item>
+                                      <ion-label position="floating">CPF</ion-label>
+                                      <ion-input placeholder="Digite o CPF" [(ngModel)]="formUser.cpf"></ion-input>
+                                    </ion-item>
+                                  </ion-col>
+                                  <ion-col size="12" sizeMd="6">
+                                    <ion-item>
+                                      <ion-label position="floating">Tipo de Usuário</ion-label>
+                                      <ion-select placeholder="Selecione a função" [(ngModel)]="formUser.roleId">
+                                        <ion-select-option *ngFor="let userRole of userRoles" [value]="userRole.id">{{userRole.name}}</ion-select-option>
+                                      </ion-select>
+                                    </ion-item>
+                                  </ion-col>
+                                </ion-row>
+                                <ion-row>
+                                  <ion-col>
+                                    <ion-button *ngIf="!edit" (click)="cadastrarUsuario()">Salvar Informações</ion-button>
+                                    <ion-button *ngIf="edit" (click)="editarUsuario()">Editar Informações</ion-button>
+                                  </ion-col>
+                                </ion-row>
+                              </ion-content>
+                            </ng-template>
+                          </ion-modal>
+                        </td>
                       </tr>
                     </tbody>
                   </table>

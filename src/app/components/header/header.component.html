@@ -137,7 +137,7 @@
     </ion-col>
       <ion-col class="ion-text-end h-100 ion-align-self-center">
         <div *ngIf="userS.user" id="trigger-button" class="cursor-pointer">
-          <span class="text">Admin </span>
+          <span class="text">{{userS.userInfo.role.name}} </span>
           <ion-icon icon="person-circle-outline" class="icon-selector mx-2" style="font-size: 25px"></ion-icon>
           <ion-popover [isOpen]="popoverOpen" [arrow]="false" trigger="trigger-button">
             <ng-template>

@@ -34,6 +34,7 @@ export class LoginPage implements OnInit {
     if (resLogin?.token) {
       if (resLogin?.user?.role?.name === 'Admin') {
         this.userS.user = 'admin';
+        this.userS.userInfo = resLogin.user;
         this.userS.token = resLogin.token;
         this.userS.pagesMenuUser = false;
         this.router.navigateByUrl('/admin/dashboard');
@@ -46,7 +47,7 @@ export class LoginPage implements OnInit {
       } else if (resLogin?.user.role?.name === 'Moderator') {
         this.userS.user = 'admin';
         this.userS.userInfo = resLogin.user;
-        this.userS.pagesMenuUser = true;
+        this.userS.pagesMenuUser = false;
         this.userS.token = resLogin.token;
         this.router.navigateByUrl('/admin/dashboard');
       }

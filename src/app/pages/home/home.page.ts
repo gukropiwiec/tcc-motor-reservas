@@ -31,7 +31,8 @@ export class HomePage implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.nossosQuartos = (await this.getQuartos()) as any[];
+    const nossosQuartosRes = (await this.getQuartos()) as any[];
+    this.nossosQuartos = nossosQuartosRes.slice(0, 4);
   }
 
   getQuartos() {

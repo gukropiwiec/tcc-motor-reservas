@@ -40,6 +40,7 @@ export class HeaderComponent implements OnInit {
 
   setHotel(hotel) {
     this.hotelS.hotel = hotel;
+    window.location.reload();
   }
 
   private async presentAlertConfirm() {

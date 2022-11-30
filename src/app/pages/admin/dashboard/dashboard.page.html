@@ -15,13 +15,7 @@
               <ion-col>
                 <ion-card>
                   <ion-card-header>{{reservas.length}}</ion-card-header>
-                  <ion-card-content>Quantitade Reservas</ion-card-content>
-                </ion-card>
-              </ion-col>
-              <ion-col>
-                <ion-card>
-                  <ion-card-header>{{quartosLivres.length}}</ion-card-header>
-                  <ion-card-content>Acomodações Livres</ion-card-content>
+                  <ion-card-content>Quantitade Total de Reservas</ion-card-content>
                 </ion-card>
               </ion-col>
               <ion-col>
@@ -53,6 +47,118 @@
         </ion-card>
       </ion-col>
     </ion-row> -->
+    <div class="mt-5">
+      <h4>INFORMAÇÕES DO HOTEL</h4>
+      <ion-row>
+        <ion-col>
+          <ion-card class="card-background-gray my-4">
+            <ion-card-content>
+              <ion-row>
+                <ion-col>
+                  <p style="color: black">
+                    <b>Nome:</b> {{hotelS.hotel.name}}
+                    <br><br>
+                    <b>Endereço:</b> {{hotelS.hotel.addressStreet}}, {{hotelS.hotel.addressNumber}} <br> {{hotelS.hotel.addressDistrict}}, {{hotelS.hotel.addressCity}} - {{hotelS.hotel.addressCountry}}
+                    <br>
+                    <b>CEP:</b> {{hotelS.hotel.addressCep}}
+                    <br><br>
+                    <b>Telefone:</b> {{hotelS.hotel.phone}}
+                    <br><br>
+                    <b>Email:</b> {{hotelS.hotel.email}}
+                    <br><br>
+                    <b>CNPJ:</b> {{hotelS.hotel.cnpj}}
+                  </p>
+                </ion-col>
+                <ion-col *ngIf="userS.userInfo.role.name === 'Admin'">
+                  <ion-button (click)="setModalHotelOpen(true)">Editar Informações do Hotel</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-modal [isOpen]="isModalHotelOpen" [backdropDismiss]="false">
+          <ng-template>
+            <ion-header>
+              <ion-toolbar>
+                <ion-title>Editar Informações do Hotel</ion-title>
+                <ion-buttons slot="end">
+                  <ion-button (click)="setModalHotelOpen(false)">Fechar</ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+            </ion-header>
+            <ion-content class="ion-padding">
+              <ion-row>
+                <ion-col size="12" sizeMd="6">
+                  <ion-item>
+                    <ion-label position="floating">Nome</ion-label>
+                    <ion-input placeholder="Digite o nome" [(ngModel)]="formEditHotel.name"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="12" sizeMd="6">
+                  <ion-item>
+                    <ion-label position="floating">Rua</ion-label>
+                    <ion-input placeholder="Digite a rua" [(ngModel)]="formEditHotel.addressStreet"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="12" sizeMd="6">
+                  <ion-item>
+                    <ion-label position="floating">Número</ion-label>
+                    <ion-input type="number" placeholder="Digite o número" [(ngModel)]="formEditHotel.addressNumber"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="12" sizeMd="6">
+                  <ion-item>
+                    <ion-label position="floating">Bairro</ion-label>
+                    <ion-input placeholder="Digite o bairro" [(ngModel)]="formEditHotel.addressDistrict"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="12" sizeMd="6">
+                  <ion-item>
+                    <ion-label position="floating">Cidade</ion-label>
+                    <ion-input placeholder="Digite a cidade" [(ngModel)]="formEditHotel.addressCity"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="12" sizeMd="6">
+                  <ion-item>
+                    <ion-label position="floating">País</ion-label>
+                    <ion-input placeholder="Digite o país" [(ngModel)]="formEditHotel.addressCountry"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="12" sizeMd="6">
+                  <ion-item>
+                    <ion-label position="floating">CEP</ion-label>
+                    <ion-input placeholder="Digite o CEP" [(ngModel)]="formEditHotel.addressCep"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="12" sizeMd="6">
+                  <ion-item>
+                    <ion-label position="floating">Telefone</ion-label>
+                    <ion-input placeholder="Digite o telefone" [(ngModel)]="formEditHotel.phone"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="12" sizeMd="6">
+                  <ion-item>
+                    <ion-label position="floating">E-mail</ion-label>
+                    <ion-input placeholder="Digite o e-mail" [(ngModel)]="formEditHotel.email"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="12" sizeMd="6">
+                  <ion-item>
+                    <ion-label position="floating">CNPJ</ion-label>
+                    <ion-input placeholder="Digite o CNPJ" [(ngModel)]="formEditHotel.cnpj"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-button (click)="editarHotel()">Salvar Informações</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-content>
+          </ng-template>
+        </ion-modal>
+      </ion-row>
+    </div>
     <h4 class="mt-5 mb-3">ÚLTIMAS RESERVAS</h4>
     <ion-row>
       <ion-col>

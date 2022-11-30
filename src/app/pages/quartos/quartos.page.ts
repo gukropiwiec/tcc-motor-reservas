@@ -33,12 +33,14 @@ export class QuartosPage implements OnInit {
   checkInDateShow = '-';
   checkOutDate = null;
   checkOutDateShow = '-';
-  qtyAdults = 0;
-  qtyChildren = 0;
+  qtyAdults = '1';
+  qtyChildren = '0';
   formBusca: BuscaReservaQuarto;
   busca = false;
   isModalOpen = false;
+  isModalImagesOpen = false;
   preferenceUrl = null;
+  imagesToShow = [];
 
   loadingReserva = false;
 
@@ -49,12 +51,18 @@ export class QuartosPage implements OnInit {
     private userS: UserService
   ) {}
 
-  async ngOnInit() {
+  async ngOnInit() {}
+
+  async ionViewWillEnter() {
     const data = history.state;
     delete data.navigationId;
 
     if (Object.keys(data).length > 1) {
       this.formBusca = data;
+      this.formatCheckInDate(data.checkInDate);
+      this.formatCheckOutDate(data.checkOutDate);
+      this.qtyAdults = data.qtyAdults.toString();
+      this.qtyChildren = data.qtyChildren.toString();
       this.quartos = (await this.httpS.post('room/available', data)) as any[];
       this.busca = true;
     } else {
@@ -162,8 +170,8 @@ export class QuartosPage implements OnInit {
     this.checkInDateShow = '-';
     this.checkOutDate = null;
     this.checkOutDateShow = '-';
-    this.qtyAdults = 0;
-    this.qtyChildren = 0;
+    this.qtyAdults = '1';
+    this.qtyChildren = '0';
     this.busca = false;
     this.quartos = (await this.httpS.get('room')) as any[];
   }
@@ -173,6 +181,11 @@ export class QuartosPage implements OnInit {
       window.location.reload();
     }
     this.isModalOpen = isOpen;
+  }
+
+  setModalImagesOpen(isOpen: boolean, quartoImages = []) {
+    this.isModalImagesOpen = isOpen;
+    this.imagesToShow = quartoImages;
   }
 
   private formatDate(value: string, pattern = 'dd/MM/yyyy') {

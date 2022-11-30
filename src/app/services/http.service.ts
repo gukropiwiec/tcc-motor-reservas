@@ -2,6 +2,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { HotelService } from './hotel.service';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -10,7 +11,11 @@ import { UserService } from './user.service';
 export class HttpService {
   private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient, private userS: UserService) {}
+  constructor(
+    private http: HttpClient,
+    private userS: UserService,
+    private hotelS: HotelService
+  ) {}
 
   login(data) {
     return this.http.post(`${this.apiUrl}/login`, data).toPromise();
@@ -25,6 +30,7 @@ export class HttpService {
     return this.http
       .post(`${this.apiUrl}/${routeEndpoint}`, data, {
         headers: { Authorization: jwt },
+        params: { hotelId: this.hotelS.hotel.id },
       })
       .toPromise();
   }
@@ -34,6 +40,7 @@ export class HttpService {
     return this.http
       .get(`${this.apiUrl}/${routeEndpoint}`, {
         headers: { Authorization: jwt },
+        params: { hotelId: this.hotelS.hotel.id },
       })
       .toPromise();
   }
@@ -43,6 +50,7 @@ export class HttpService {
     return this.http
       .get(`${this.apiUrl}/${routeEndpoint}/${id}`, {
         headers: { Authorization: jwt },
+        params: { hotelId: this.hotelS.hotel.id },
       })
       .toPromise();
   }
@@ -52,6 +60,7 @@ export class HttpService {
     return this.http
       .put(`${this.apiUrl}/${routeEndpoint}/${id}`, data, {
         headers: { Authorization: jwt },
+        params: { hotelId: this.hotelS.hotel.id },
       })
       .toPromise();
   }
@@ -61,6 +70,7 @@ export class HttpService {
     return this.http
       .delete(`${this.apiUrl}/${routeEndpoint}/${id}`, {
         headers: { Authorization: jwt },
+        params: { hotelId: this.hotelS.hotel.id },
       })
       .toPromise();
   }

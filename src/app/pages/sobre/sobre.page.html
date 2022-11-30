@@ -4,23 +4,37 @@
       <ion-col size="12" sizeMd="8" sizeLg="4">
         <ion-card class="sobre-card py-3">
           <ion-card-header>
-            <ion-card-title>SOBRE</ion-card-title>
+            <ion-card-title>{{hotelS.hotel.name}}</ion-card-title>
           </ion-card-header>
         
           <ion-card-content>
             <div>
+              <h1 style="color: black" class="fw-bold">Sobre</h1>
               <p style="font-weight: bold;">
                 A Eco Estância MAKTUB é uma Propriedade Privada Única que oferece primordialmente o esplendor e a exuberância da linda Floresta da Mata Atlântica; dos rios, dos caminhos, das trilhas, das Montanhas e a diversidade de vida da Natureza desta região, que proporcionam prazeres de bem-estar, descontração, relaxamento, reequilíbrio emocional e harmonia aos locatários e visitantes do Day use. Proporcionamos uma experiência exclusiva de imersão na natureza.
-                <br><br>
-                Localizada em um ambiente privilegiado, às margens do Rio Ipiranga, afluente do Rio Nhundiaquara, e aos pés do Conjunto de Montanhas do Pico do Marumbi. Nosso clima subtropical é quente super úmido, e a riqueza e abundância da biodiversidade decorre da fartura de água e de umidade. Além das maravilhas ecológicas, a Eco Estância Maktub está localizada em um local histórico que foi a principal ligação entre o Litoral Paranaense e o Planalto durante quase 250 anos, no Caminho do Itupava, no Distrito de Porto de Cima, no Município de Morretes, a 65 km de Curitiba – PR.
-                <br><br>
-                Este local é um presente de Deus, um paraíso que tem guardiões, os quais detêm a sua posse no intuito de preservá-la para as próximas gerações. Nosso maior desejo é surpreender, não temos interesse em divulgar nada que crie uma ideia distorcida; pois não acreditamos nisto, queremos que os locatários encontrem sempre algo a mais do que esperavam, nisto nós acreditamos. Essa é a nossa verdadeira Missão. Um pedacinho da floresta, chamado MAKTUB. Sendo assim, alertamos que este local não é ideal ou recomendado para pessoas que sofrem de rinite alérgica por umidade, que procuram luxo, que não gostem ou tenham alguma dificuldade de convivência com animais silvestres, os quais são os verdadeiros moradores e ocupantes deste lugar. Nossas edificações estão sempre higienizadas e cheirosas, mas não estamos isentos da forte umidade local.
-                <br><br>
-                Ainda, pedimos toda atenção para a nossa Política de Cancelamento, antes de realizar sua reserva.
+                <!-- <br><br> -->
+                <!-- Localizada em um ambiente privilegiado, às margens do Rio Ipiranga, afluente do Rio Nhundiaquara, e aos pés do Conjunto de Montanhas do Pico do Marumbi. Nosso clima subtropical é quente super úmido, e a riqueza e abundância da biodiversidade decorre da fartura de água e de umidade. Além das maravilhas ecológicas, a Eco Estância Maktub está localizada em um local histórico que foi a principal ligação entre o Litoral Paranaense e o Planalto durante quase 250 anos, no Caminho do Itupava, no Distrito de Porto de Cima, no Município de Morretes, a 65 km de Curitiba – PR. -->
+                <br><br><br>
               </p>
+              <h1 style="color: black" class="fw-bold">Endereço</h1>
+              <br>
+              <p>
+                {{hotelS.hotel.addressStreet}}, {{hotelS.hotel.addressNumber}} - {{hotelS.hotel.addressDistrict}}, {{hotelS.hotel.addressCity}} - {{hotelS.hotel.addressCountry}}
+                <br>
+                CEP: {{hotelS.hotel.addressCep}}
+              </p>
+              <br><br>
+              <h1 style="color: black" class="fw-bold">Informações</h1>
+              <br>
+              <p *ngFor="let hotelItem of hotelItems">{{hotelItem.description}}</p>
             </div>
           </ion-card-content>
         </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="text-center">
+        <iframe width="600" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" id="gmap_canvas" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=%20Curitiba+()&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
       </ion-col>
     </ion-row>
   </section>

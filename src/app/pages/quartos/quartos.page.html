@@ -80,7 +80,7 @@
                 ></ion-icon>
                 Adultos</ion-label
               >
-              <ion-select id="qtyAdultsEl" [value]="qtyAdults">
+              <ion-select id="qtyAdultsEl" [(ngModel)]="qtyAdults">
                 <ion-select-option value="1">1</ion-select-option>
                 <ion-select-option value="2">2</ion-select-option>
                 <ion-select-option value="3">3</ion-select-option>
@@ -99,7 +99,7 @@
                 ></ion-icon>
                 Crianças</ion-label
               >
-              <ion-select id="qtyChildrenEl" [value]="qtyChildren">
+              <ion-select id="qtyChildrenEl" [(ngModel)]="qtyChildren">
                 <ion-select-option value="0">0</ion-select-option>
                 <ion-select-option value="1">1</ion-select-option>
                 <ion-select-option value="2">2</ion-select-option>
@@ -140,9 +140,31 @@
     <ion-grid *ngIf="quartos.length > 0">
       <ion-row class="my-5" *ngFor="let quarto of quartos">
         <ion-col sizeXl="4" size="12">
-          <div class="img-quarto text-center">
+          <div class="img-quarto text-center cursor-pointer" (click)="setModalImagesOpen(true, quarto.images)">
             <img src="{{quarto.images[0]?.url}}" />
           </div>
+          <ion-modal
+            [isOpen]="isModalImagesOpen"
+            [backdropDismiss]="false"
+          >
+            <ng-template>
+              <ion-header>
+                <ion-toolbar>
+                  <ion-title>Fotos do Quarto</ion-title>
+                  <ion-buttons slot="end">
+                    <ion-button (click)="setModalImagesOpen(false)">Fechar</ion-button>
+                  </ion-buttons>
+                </ion-toolbar>
+              </ion-header>
+              <ion-content>
+                <ion-row class="img-wrapper" *ngFor="let image of imagesToShow">
+                  <ion-col>
+                    <img src="{{image.url}}">
+                  </ion-col>
+                </ion-row>
+              </ion-content>
+            </ng-template>
+          </ion-modal>
         </ion-col>
         <ion-col>
           <div class="card-info ion-padding">
@@ -213,6 +235,7 @@
     trigger="trigger-modal"
     [isOpen]="isModalOpen"
     style="--max-height: 80vh"
+    [backdropDismiss]="false"
   >
     <ng-template>
       <ion-header>

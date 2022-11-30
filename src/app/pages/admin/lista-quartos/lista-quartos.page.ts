@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AlertController, IonModal, ToastController } from '@ionic/angular';
+import { HotelService } from 'src/app/services/hotel.service';
 import { HttpService } from 'src/app/services/http.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-lista-quartos',
@@ -13,15 +15,40 @@ export class ListaQuartosPage implements OnInit {
 
   quartos = [];
   formInput: FormGroup;
+  isModalEditarQuartoOpen = false;
+  isModalTarifasOpen = false;
+  formEdit = {
+    id: null,
+    name: null,
+    description: null,
+    quantity: null,
+    capacity: null,
+    tariffs: [],
+    hotelId: this.hotelS.hotel.id,
+    images: [],
+  };
+  formTarifas = {
+    roomId: null,
+    name: null,
+    price: null,
+    description: null,
+    promotional: false,
+    startDate: null,
+    endDate: null,
+  };
 
   constructor(
     private httpS: HttpService,
     private toastController: ToastController,
     private alertController: AlertController,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private hotelS: HotelService,
+    public userS: UserService
   ) {}
 
-  async ngOnInit() {
+  async ngOnInit() {}
+
+  async ionViewWillEnter() {
     await this.atualizarQuartos();
     this.formInput = this.fb.group({
       name: null,
@@ -29,7 +56,7 @@ export class ListaQuartosPage implements OnInit {
       quantity: null,
       capacity: null,
       price: null,
-      hotelId: 1,
+      hotelId: this.hotelS.hotel.id,
       photos: null,
     });
   }
@@ -86,6 +113,18 @@ export class ListaQuartosPage implements OnInit {
     this.formInput.reset();
   }
 
+  dismissModalEdit() {
+    this.setModalEditarQuartoOpen(false);
+  }
+
+  setModalTarifaOpen(isOpen: boolean, roomId?) {
+    this.isModalTarifasOpen = isOpen;
+  }
+
+  dismissModalTarifa() {
+    this.setModalTarifaOpen(false);
+  }
+
   async deleteRoom(quarto) {
     await this.presentAlertConfirm(quarto);
   }
@@ -94,6 +133,40 @@ export class ListaQuartosPage implements OnInit {
     const photos = (event.target as HTMLInputElement).files;
     this.formInput.patchValue({ photos });
     this.formInput.get('photos').updateValueAndValidity();
+  }
+
+  setModalEditarQuartoOpen(
+    isOpen: boolean,
+    quarto = {
+      ...this.formEdit,
+    }
+  ) {
+    this.formEdit = quarto;
+    if (!isOpen) {
+      this.formEdit = {
+        id: null,
+        name: null,
+        description: null,
+        quantity: null,
+        capacity: null,
+        tariffs: [],
+        hotelId: this.hotelS.hotel.id,
+        images: [],
+      };
+    }
+    this.isModalEditarQuartoOpen = isOpen;
+  }
+
+  async excluirFoto(id) {
+    await this.httpS.delete('room-image', id);
+    this.setModalEditarQuartoOpen(false);
+    await this.atualizarQuartos();
+  }
+
+  async editarQuarto() {
+    await this.httpS.put('room', this.formEdit, this.formEdit.id);
+    this.presentToast('Informações alteradas com sucesso.', 'success');
+    this.setModalEditarQuartoOpen(false);
   }
 
   private async presentToast(message: string, color: string) {

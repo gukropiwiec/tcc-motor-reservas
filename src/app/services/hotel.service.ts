@@ -15,7 +15,7 @@ export class HotelService {
     return this.hotelTemp;
   }
 
-  public set hotel(hotel: string) {
+  public set hotel(hotel: any) {
     this.hotelTemp = hotel;
     localStorage.setItem('hotel', JSON.stringify(this.hotelTemp));
   }

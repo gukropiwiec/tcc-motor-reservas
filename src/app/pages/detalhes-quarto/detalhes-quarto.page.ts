@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HotelService } from 'src/app/services/hotel.service';
 
 @Component({
   selector: 'app-detalhes-quarto',
@@ -6,10 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./detalhes-quarto.page.scss'],
 })
 export class DetalhesQuartoPage implements OnInit {
+  constructor(public hotelS: HotelService) {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
